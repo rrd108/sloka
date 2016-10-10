@@ -87,8 +87,31 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+header, footer {
+    background-color: #0a0;
+    color: #ffa;
+    width: 100%;
+    position: fixed;
+}
+
+header {
+    top: 0;
+}
+
+footer {
+    bottom: 0;
+}
+
+nav {
+    padding: 2em 1em 1em 1em;
+}
+
 nav img {
     cursor: pointer;
+}
+
+section {
+    padding: 1em;
 }
 
 
