@@ -1,5 +1,5 @@
 (function($){
-    var steps = 7;
+    var steps = 3;
 
     var verse = 'ceto-darpaṇa-mārjanaṁ bhava-mahā-dāvāgni-nirvāpaṇaṁ' + "\n" +
         'śreyaḥ-kairava-candrikā-vitaraṇaṁ vidyā-vadhū-jīvanam' + "\n" +
@@ -16,21 +16,21 @@
         'nektár ízét élvezhessük.«”';
 
     if (localStorage.getItem('counter') === null) {
-        localStorage.setItem('counter', 0);
+        localStorage.setItem('counter', 1);
+    } else {
+        localStorage.setItem('counter', parseInt(localStorage.getItem('counter')) + 1);
     }
+
     if (localStorage.getItem('lap') === null) {
         localStorage.setItem('lap', 1);
     }
-    localStorage.setItem('counter', parseInt(localStorage.getItem('counter')) + 1);
+
     if (localStorage.getItem('counter') > steps) {
         localStorage.setItem('lap', parseInt(localStorage.getItem('lap')) + 1);
         localStorage.setItem('counter', 1);
     }
 
-localStorage.setItem('lap', 2);
-localStorage.setItem('counter', 7);
-
-    if (localStorage.getItem('lap') == 2) {
+    function step2() {
         //make first few character visible of each words
         var match, splitters = [];
         var splitPattern = /[ \-\n]/g;
@@ -55,8 +55,8 @@ localStorage.setItem('counter', 7);
                     modifiedWord += word[i];
                 } else {
                     //this is a hidden char
-                    //modifiedWord += '<span class="invisible">' + word[i] + '</span>';
-                    modifiedWord += '<span style="color:#eee">' + word[i] + '</span>';
+                    modifiedWord += '<span class="invisible">' + word[i] + '</span>';
+                    //modifiedWord += '<span style="color:#eee">' + word[i] + '</span>';
                     // TODO 1 span per word would be better
                 }
             }
@@ -66,14 +66,40 @@ localStorage.setItem('counter', 7);
         });
 
         verse = modifiedVerse;
+        updateMain();
+    }
+
+    function step(num) {
+        localStorage.setItem('lap', num);
+        if (num == 2) {
+            step2();
+        }
+    }
+
+    function updateMain() {
+        verse = verse.replace(/(?:\n)/g, '<br>');
+        $('#main').html(verse + '<hr>' + translation);
     }
 
     $(function() {
         //onready
+        $('nav img').click(function(event) {
+            $('nav img').each(function() {
+                if (event.target == this) {
+                    var num = $(this).attr('src').replace(/\.png/, '');
+                    num = num.replace(/img\//, '');
+                    num = num.replace(/\-filled/, '');
+                    step(num);
+                    $(this).attr('src', $(this).attr('src').replace(/\.png/, '-filled.png'));
+                } else {
+                    $(this).attr('src', $(this).attr('src').replace(/\-filled/, ''));
+                }
+            });
+        });
+
         $('#counter').text(localStorage.getItem('lap') + '/' + localStorage.getItem('counter'));
 
-        verse = verse.replace(/(?:\n)/g, '<br>');
-        $('#main').html(verse + '<hr>' + translation);
+        updateMain();
     });
 
 })(jQuery);
