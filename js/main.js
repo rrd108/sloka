@@ -18,7 +18,7 @@
 
     function makeAllTextVisible() {
         //make all visible
-        text = text.replace(/<span class="invisible">/g, '');
+        text = text.replace(/<span class="unseen">/g, '');
         text = text.replace(/<\/span>/g, '');
     }
 
