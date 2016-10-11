@@ -53,7 +53,8 @@
         $.each(v.words, function (index, word) {
             var spanPos = parseInt(word.length / 2);
             var modifiedWord = word.substr(0, spanPos) +
-                '<span class="invisible">' +
+                //'<span class="invisible">' +
+                '<span class="unseen">' +
                 word.substr(spanPos, word.length - spanPos) +
                 '</span>';
             putSplittersBack(v, modifiedWord);
@@ -68,7 +69,8 @@
         $.each(v.words, function (index, word) {
             var spanPos = parseInt(word.length - 1);
             var modifiedWord = word.substr(0, 1) +
-                '<span class="invisible">' +
+                //'<span class="invisible">' +
+                '<span class="unseen">' +
                 word.substr(1, spanPos) +
                 '</span>';
             putSplittersBack(v, modifiedWord);
@@ -115,6 +117,15 @@
                 } else {
                     removeFilledFromImgSrc($(this));
                 }
+            });
+        });
+
+        //attach event handlers to spans
+        //we use .on() as it will work with later dynamically created spans
+        $('p').on('click', 'span', function() {
+            $(this).removeClass('unseen');
+            $(this).delay(2000).queue(function(){
+                $(this).addClass('unseen');
             });
         });
 

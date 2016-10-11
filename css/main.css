@@ -110,10 +110,9 @@ nav img {
     cursor: pointer;
 }
 
-section {
-    padding: 1em;
+span.unseen {
+    color: #ffd;
 }
-
 
 /* ==========================================================================
    Helper classes
