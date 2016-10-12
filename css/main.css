@@ -87,6 +87,10 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+p {
+    padding: .7em;
+}
+
 header, footer {
     background-color: #0a0;
     width: 100%;
@@ -101,7 +105,7 @@ footer {
     bottom: 0;
 }
 
-nav {
+nav, #login > p {
     padding: 2em 1em 1em 1em;
 }
 
