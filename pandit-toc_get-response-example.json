@@ -1,0 +1,118 @@
+{
+  "id":1,
+  "title":"A Bhagavad-gītā úgy, ahogy van",
+  "children":[
+    {
+      "id":2,
+      "parentStart":true,
+      "title":"Kezdete"
+    },
+    {
+      "id":3,
+      "title":"Prológus"
+    },
+    {
+      "id":4,
+      "title":"Előszó"
+    },
+    {
+      "id":5,
+      "title":"Bevezetés"
+    },
+    {
+      "id":6,
+      "title":"ELSŐ FEJEZETǀHadiszemle a kurukṣetrai csatamezőn",
+      "partial":true
+    },
+    {
+      "id":47,
+      "title":"MÁSODIK FEJEZETǀA Bhagavad-gītā tartalmának összefoglalása",
+      "partial":true
+    },
+    {
+      "id":120,
+      "title":"HARMADIK FEJEZETǀKarma-yoga",
+      "partial":true
+    },
+    {
+      "id":165,
+      "title":"NEGYEDIK FEJEZETǀTranszcendentális tudás",
+      "partial":true
+    },
+    {
+      "id":209,
+      "title":"ÖTÖDIK FEJEZETǀKarma-yoga – cselekvés Kṛṣṇa-tudatban",
+      "partial":true
+    },
+    {
+      "id":238,
+      "title":"HATODIK FEJEZETǀDhyāna-yoga",
+      "partial":true
+    },
+    {
+      "id":282,
+      "title":"HETEDIK FEJEZETǀAz Abszolútról szóló tudás",
+      "partial":true
+    },
+    {
+      "id":314,
+      "title":"NYOLCADIK FEJEZETǀA Legfelsőbb elérése",
+      "partial":true
+    },
+    {
+      "id":344,
+      "title":"KILENCEDIK FEJEZETǀA legbizalmasabb tudás",
+      "partial":true
+    },
+    {
+      "id":380,
+      "title":"TIZEDIK FEJEZETǀAz Abszolút fensége",
+      "partial":true
+    },
+    {
+      "id":422,
+      "title":"TIZENEGYEDIK FEJEZETǀA kozmikus forma",
+      "partial":true
+    },
+    {
+      "id":476,
+      "title":"TIZENKETTEDIK FEJEZETǀAz odaadó szolgálat",
+      "partial":true
+    },
+    {
+      "id":494,
+      "title":"TIZENHARMADIK FEJEZETǀA természet, az élvező és a tudat",
+      "partial":true
+    },
+    {
+      "id":525,
+      "title":"TIZENNEGYEDIK FEJEZETǀAz anyagi természet három kötőereje",
+      "partial":true
+    },
+    {
+      "id":551,
+      "title":"TIZENÖTÖDIK FEJEZETǀA Legfelsőbb Személy elérésének yogája",
+      "partial":true
+    },
+    {
+      "id":572,
+      "title":"TIZENHATODIK FEJEZETǀAz isteni és a démoni természet",
+      "partial":true
+    },
+    {
+      "id":593,
+      "title":"TIZENHETEDIK FEJEZETǀA hit fajtái",
+      "partial":true
+    },
+    {
+      "id":621,
+      "title":"TIZENNYOLCADIK FEJEZETǀVégkövetkeztetés – a tökéletes lemondás",
+      "partial":true
+    },
+    {
+      "id":699,
+      "title":"Tárgy- és névmutató",
+      "partial":true
+    }
+  ]
+}
