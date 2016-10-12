@@ -2,11 +2,13 @@
 
     var books = {};
 
+    var tocGetUrl = 'http://pandit.hu/app/toc/get/';
+    //for local testing
+    tocGetUrl = 'pandit-toc_get-response-example.json?';
+
     $.ajax(
         {
-            url : 'http://pandit.hu/app/toc/get/0',
-            //url : 'pandit-toc_get-response-example.json',
-            //url: 'pandit-expired.json',
+            url : tocGetUrl + 0,
             xhrFields: {
                 withCredentials: true
             },
@@ -166,9 +168,9 @@
             $('#books').change(function () {
                 $.ajax(
                     {
-                        //url : 'http://pandit.hu/app/toc/get/' + $(this).find('option:selected').val(),
-                        //url : 'pandit-toc_get-response-example.json',
-                        url: 'pandit-expired.json',
+                        //url : tocGetUrl + $(this).find('option:selected').val(),
+                        url : 'pandit-toc_get-response-example.json',
+                        //url: 'pandit-expired.json',
                         xhrFields: {
                             withCredentials: true
                         },
