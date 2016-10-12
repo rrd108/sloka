@@ -13,7 +13,7 @@
             success : function(response){
                 if (response.id) {
                     //the user is logged in to pandit
-                    books = response.children;
+                    books = response;
                 } else {
                     //display log in to pandit
                     $('#login').show();
@@ -203,10 +203,15 @@
                         password: window.md5($('#password').val())
                     },
                     success: function (response) {
-                        console.log(response);
+                        if (response.ok) {
+                            //we are logged in
+                            $('#login').hide();
+                            $('#app').show();
+                        }
+                        // TODO response.message.search('csak 1 eszközön') != -1
                     },
                     error: function (response) {
-                        console.log(response);
+                        console.log(response);  // TODO
                     }
                 });
             });
