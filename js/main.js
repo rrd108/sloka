@@ -132,6 +132,33 @@
         addFilledToImgSrc($('#s' + localStorage.getItem('step')));
 
         step(localStorage.getItem('step'));
+
+        $('#books').change(function(){
+            $.ajax(
+                {
+//url : 'http://pandit.hu/app/toc/get/' + $(this).find('option:selected').val(),
+                    url : 'pandit-toc_get-response-example.json',
+                    //url: 'pandit-expired.json',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    success : function(response){
+                        if (response.error == 'expired') {
+                            //the user should log in to pandit
+                            // TODO display message to user ask for login
+                            alert('Login at pandit.hu');
+                        } else if (response.id) {
+                            $.each(response.children, function(index, item){
+
+                            });
+                        }
+                    },
+                    error : function(response){
+                        // TODO display some error message
+                    }
+                }
+            );
+        });
     });
 
 })(jQuery);
