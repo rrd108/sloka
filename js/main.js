@@ -107,7 +107,7 @@
         text = v.modifiedVerse;
     }
 
-    function step(num) {
+    function loadText(num) {
         localStorage.setItem('step', num);
         if (num == 1) {
             makeAllTextVisible();
@@ -116,10 +116,10 @@
         } else if (num == 3) {
             makeFirstCharVisible();
         }
-        updateMain();
+        displayText();
     }
 
-    function updateMain() {
+    function displayText() {
         $('#main').html(text.replace(/(?:\n)/g, '<br>'));
     }
 
@@ -142,7 +142,7 @@
                         var num = $(this).attr('src').replace('.png', '');
                         num = num.replace('img/', '');
                         num = num.replace('-filled', '');
-                        step(num);
+                        loadText(num);
                         addFilledToImgSrc($(this));
                     } else {
                         removeFilledFromImgSrc($(this));
@@ -161,7 +161,7 @@
 
             addFilledToImgSrc($('#s' + localStorage.getItem('step')));
 
-            step(localStorage.getItem('step'));
+            loadText(localStorage.getItem('step'));
 
             $('#books').change(function () {
                 $.ajax(
