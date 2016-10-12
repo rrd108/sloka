@@ -135,9 +135,10 @@
         img.attr('src', img.attr('src').replace('-filled', ''));
     }
 
-    $(function() {
-        //onready
-        if (books.id) {
+    $(function() {      //onready
+        if (books.id) {     //we are logged in to pandit
+
+            //attach event handlers for nav images and load last verse from localStorage
             $('nav img').click(function (event) {
                 $('nav img').each(function () {
                     if (event.target == this) {
@@ -182,7 +183,7 @@
                                 $('#app').hide();
                             } else if (response.id) {
                                 $.each(response.children, function (index, item) {
-
+                                    //ad a second select here
                                 });
                             }
                         },
