@@ -8,6 +8,7 @@
 
     $.ajax(
         {
+            dataType: 'jsonp',
             url : tocGetUrl + 0,
             xhrFields: {
                 withCredentials: true
