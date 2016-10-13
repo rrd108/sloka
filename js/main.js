@@ -4,7 +4,7 @@
 
     var tocGetUrl = 'http://pandit.hu/app/toc/get/';
     //for local testing
-    tocGetUrl = 'pandit-toc_get-response-example.json?';
+    //tocGetUrl = 'pandit-toc_get-response-example.json?';
 
     $.ajax(
         {
