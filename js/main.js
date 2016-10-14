@@ -146,9 +146,9 @@
             $('nav img').click(function (event) {
                 $('nav img').each(function () {
                     if (event.target == this) {
-                        var num = $(this).attr('src').replace('.png', '');
-                        num = num.replace('img/', '');
-                        num = num.replace('-filled', '');
+                        var num = $(this).attr('src').replace('.png', '')
+                            .replace('img/', '')
+                            .replace('-filled', '');
                         loadText(num);
                         addFilledToImgSrc($(this));
                     } else {
