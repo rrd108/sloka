@@ -44,8 +44,11 @@
         'és képessé tesz bennünket arra, hogy minden pillanatban a tökéletes ' +
         'nektár ízét élvezhessük.«”';
 
-    if (localStorage.getItem('step') === null) {
-        localStorage.setItem('step', 1);
+    var sloka = {
+        step : 1,
+    };
+    if ($.localStorage('sloka.step')  === null) {
+        $.localStorage('sloka.step', 1);
     }
 
     function makeAllTextVisible() {
@@ -111,7 +114,7 @@
     }
 
     function loadText(num) {
-        localStorage.setItem('step', num);
+        localStorage.setItem('sloka.step', num);
         if (num == 1) {
             makeAllTextVisible();
         } else if (num == 2) {
@@ -163,9 +166,9 @@
                 });
             });
 
-            addFilledToImgSrc($('#s' + localStorage.getItem('step')));
+            addFilledToImgSrc($('#s' + localStorage.getItem('sloka.step')));
 
-            loadText(localStorage.getItem('step'));
+            loadText(localStorage.getItem('sloka.step'));
 
             $('#books').change(function () {
                 $.ajax(
