@@ -17,6 +17,13 @@
         url.auth = url.base + 'auth/authenticate';
     }
 
+    function isAcceptableTitle(value) {
+        return value.search(/ének/i) != -1
+            || value.search(/līlā/i) != -1
+            || value.search(/fejezet/i) != -1
+            || value.search(/vers/i) != -1
+            || value.search(/mantra/i) != -1;
+    }
 
     $.ajax(
         {
@@ -29,6 +36,11 @@
                 if (response.id == 0) {
                     //the user is logged in to pandit
                     books = response;
+                    $.each(response.children[0].children, function(index, value){
+                        if (isAcceptableTitle(value.title)) {
+                            $('#sel2').append('<option value="' + value.id + '">' + value.title + '</option>');
+                        }
+                    });
                 } else {
                     //display log in to pandit and hide other parts
                     $('#login').show();
@@ -188,34 +200,45 @@
 
             $('#books').change(function () {
                 var bookId = $(this).find('option:selected').val();
-                //if this book is not in out books object
-                $.each(books.children, function (index, book){
-                    if (book.id == bookId && book.children) {
-                        //book is already in the object
-                        // TODO add a second select here
-                    } else {
-                        $.ajax(
-                            {
-                                url : url.tocGet + bookId,
-                                xhrFields: {
-                                    withCredentials: true
-                                },
-                                success: function (response) {
-                                    if (response.error == 'expired') {
-                                        $('#login').show();
-                                        $('#app').hide();
-                                    } else if (response.id >= 0) {
-                                        // TODO put the new content to book object
-                                        $.each(response.children, function (index, item) {
-                                            // TODO ad a second select here
-                                        });
-                                    }
-                                },
-                                error: function (response) {
-                                    // TODO display some error message
+                var childrenInBooks = false;
+                var indexInBooks;
+                $.each(books.children, function (index, book) {
+                    if (book.id == bookId) {
+                        indexInBooks = index;
+                        if (book.children) {
+                            childrenInBooks = true;
+                        }
+                    }
+                });
+
+                if (!childrenInBooks) {
+                    $.ajax(
+                        {
+                            url : url.tocGet + bookId,
+                            xhrFields: {
+                                withCredentials: true
+                            },
+                            success: function (response) {
+                                if (response.error == 'expired') {
+                                    $('#login').show();
+                                    $('#app').hide();
+                                } else if (response.id >= 0) {
+                                    books['children'][indexInBooks] = response;
                                 }
+                            },
+                            error: function (response) {
+                                // TODO display some error message
                             }
-                        );
+                        }
+                    );
+                }
+
+                //update second select
+                $('#sel2 > option').detach();
+                $('#sel2').append('<option>--- válassz ---</option>');
+                $.each(books.children[indexInBooks].children, function (index, value){
+                    if (isAcceptableTitle(value.title)) {
+                        $('#sel2').append('<option value="' + value.id + '">' + value.title + '</option>');
                     }
                 });
             });
