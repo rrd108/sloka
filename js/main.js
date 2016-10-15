@@ -20,13 +20,13 @@
 
     $.ajax(
         {
-            dataType: 'jsonp',
+            async: false,
             url : url.root,
             xhrFields: {
                 withCredentials: true
             },
             success : function(response){
-                if (response.id) {
+                if (response.id == 0) {
                     //the user is logged in to pandit
                     books = response;
                 } else {
