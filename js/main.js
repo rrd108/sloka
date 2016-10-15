@@ -185,30 +185,39 @@
                 options += '<option value="'  + book.id + '">' + book.title + '</option>';
             });
             $('#books').append(options);
+
             $('#books').change(function () {
-                $.ajax(
-                    {
-                        xhrFields: {
-                            withCredentials: true
-                        },
-                        success: function (response) {
-                            if (response.error == 'expired') {
-                                //display log in to pandit
-                                $('#login').show();
-                                //hide other parts
-                                $('#app').hide();
-                            } else if (response.id) {
-                                $.each(response.children, function (index, item) {
-                                    //ad a second select here
-                                });
+                var bookId = $(this).find('option:selected').val();
+                //if this book is not in out books object
+                $.each(books.children, function (index, book){
+                    if (book.id == bookId && book.children) {
+                        //book is already in the object
+                        // TODO add a second select here
+                    } else {
+                        $.ajax(
+                            {
                                 url : url.tocGet + bookId,
+                                xhrFields: {
+                                    withCredentials: true
+                                },
+                                success: function (response) {
+                                    if (response.error == 'expired') {
+                                        $('#login').show();
+                                        $('#app').hide();
+                                    } else if (response.id >= 0) {
+                                        // TODO put the new content to book object
+                                        $.each(response.children, function (index, item) {
+                                            // TODO ad a second select here
+                                        });
+                                    }
+                                },
+                                error: function (response) {
+                                    // TODO display some error message
+                                }
                             }
-                        },
-                        error: function (response) {
-                            // TODO display some error message
-                        }
+                        );
                     }
-                );
+                });
             });
         } else {
             $('#login').show();
