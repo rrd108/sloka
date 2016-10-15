@@ -1,15 +1,27 @@
 (function($){
 
     var books = {};
+    var url = {};
 
-    var tocGetUrl = 'http://pandit.hu/app/toc/get/';
-    //for local testing
-    //tocGetUrl = 'pandit-toc_get-response-example.json?';
+    var test = false;
+
+    if (test) {
+        url.base = '';
+        url.root = 'pandit-toc-root.json';
+        url.tocGet = 'pandit-toc-get-response.json-';
+        url.auth = 'pandit-authenticate.json';
+    } else {
+        url.base = 'http://pandit.hu/app/';
+        url.root = url.base + 'toc/root';
+        url.tocGet = url.base + 'toc/get/';
+        url.auth = url.base + 'auth/authenticate';
+    }
+
 
     $.ajax(
         {
             dataType: 'jsonp',
-            url : tocGetUrl + 0,
+            url : url.root,
             xhrFields: {
                 withCredentials: true
             },
@@ -173,9 +185,6 @@
             $('#books').change(function () {
                 $.ajax(
                     {
-                        //url : tocGetUrl + $(this).find('option:selected').val(),
-                        url : 'pandit-toc_get-response-example.json',
-                        //url: 'pandit-expired.json',
                         xhrFields: {
                             withCredentials: true
                         },
@@ -189,6 +198,7 @@
                                 $.each(response.children, function (index, item) {
                                     //ad a second select here
                                 });
+                                url : url.tocGet + bookId,
                             }
                         },
                         error: function (response) {
@@ -202,7 +212,7 @@
             $('#app').hide();
             $('#loginBtn').click(function(){
                 $.ajax({
-                    url: "http://pandit.hu/app/auth/authenticate",
+                    url: url.auth,
                     method: "POST",
                     dataType: "json",
                     data: {
