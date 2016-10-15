@@ -30,9 +30,8 @@
                     //the user is logged in to pandit
                     books = response;
                 } else {
-                    //display log in to pandit
+                    //display log in to pandit and hide other parts
                     $('#login').show();
-                    //hide other parts
                     $('#app').hide();
                 }
             },
