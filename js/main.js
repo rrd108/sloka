@@ -149,7 +149,7 @@
     }
 
     $(function() {      //onready
-        if (books.id) {     //we are logged in to pandit
+        if (books.id >= 0) {     //we are logged in to pandit
 
             //attach event handlers for nav images and load last verse from localStorage
             $('nav img').click(function (event) {
@@ -179,6 +179,12 @@
 
             loadText($.localStorage('sloka.step'));
 
+            //build select for books
+            var options = '';
+            $.each(books.children, function (index, book){
+                options += '<option value="'  + book.id + '">' + book.title + '</option>';
+            });
+            $('#books').append(options);
             $('#books').change(function () {
                 $.ajax(
                     {
