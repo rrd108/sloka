@@ -1,0 +1,59 @@
+{
+  "id":22894,
+  "title":"A tanítások nektárja",
+  "children":[
+    {
+      "id":22895,
+      "parentStart":true,
+      "title":"Kezdete"
+    },
+    {
+      "id":22896,
+      "title":"Előszó"
+    },
+    {
+      "id":22897,
+      "title":"Első vers"
+    },
+    {
+      "id":22898,
+      "title":"Második vers"
+    },
+    {
+      "id":22899,
+      "title":"Harmadik vers"
+    },
+    {
+      "id":22900,
+      "title":"Negyedik vers"
+    },
+    {
+      "id":22901,
+      "title":"Ötödik vers"
+    },
+    {
+      "id":22902,
+      "title":"Hatodik vers"
+    },
+    {
+      "id":22903,
+      "title":"Hetedik vers"
+    },
+    {
+      "id":22904,
+      "title":"Nyolcadik vers"
+    },
+    {
+      "id":22905,
+      "title":"Kilencedik vers"
+    },
+    {
+      "id":22906,
+      "title":"Tizedik vers"
+    },
+    {
+      "id":22907,
+      "title":"Tizenegyedik vers"
+    }
+  ]
+}
