@@ -42,7 +42,7 @@
         }
     );
 
-    var text = 'ceto-darpaṇa-mārjanaṁ bhava-mahā-dāvāgni-nirvāpaṇaṁ' + "\n" +
+    var text = '';/*'ceto-darpaṇa-mārjanaṁ bhava-mahā-dāvāgni-nirvāpaṇaṁ' + "\n" +
         'śreyaḥ-kairava-candrikā-vitaraṇaṁ vidyā-vadhū-jīvanam' + "\n" +
         'ānandāmbudhi-vardhanaṁ prati-padaṁ pūrṇāmṛtāsvādanaṁ' + "\n" +
         'sarvātma-snapanaṁ paraṁ vijayate śrī-kṛṣṇa-saṅkīrtanam' + "\n" + "\n" +
@@ -53,7 +53,7 @@
         'lelke. Kṛṣṇa szent nevének éneklése egyre nagyobbra dagasztja a ' +
         'transzcendentális élet gyönyörteli óceánját. Mindenkire hűsítően hat, ' +
         'és képessé tesz bennünket arra, hogy minden pillanatban a tökéletes ' +
-        'nektár ízét élvezhessük.«”';
+        'nektár ízét élvezhessük.«”';*/
 
     var sloka = {
         step : 1,
