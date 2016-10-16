@@ -1,6 +1,6 @@
 (function($){
 
-    var books = {};
+    var inventory = {};
     var url = {};
 
     var test = false;
@@ -35,7 +35,8 @@
             success : function(response){
                 if (response.id == 0) {
                     //the user is logged in to pandit
-                    books = response;
+                    inventory = response;
+                    //put BG chapters to sel2
                     $.each(response.children[0].children, function(index, value){
                         if (isAcceptableTitle(value.title)) {
                             $('#sel2').append('<option value="' + value.id + '">' + value.title + '</option>');
@@ -161,7 +162,7 @@
     }
 
     $(function() {      //onready
-        if (books.id >= 0) {     //we are logged in to pandit
+        if (inventory.id >= 0) {     //we are logged in to pandit
 
             //attach event handlers for nav images and load last verse from localStorage
             $('nav img').click(function (event) {
@@ -193,28 +194,30 @@
 
             //build select for books
             var options = '';
-            $.each(books.children, function (index, book){
+            $.each(inventory.children, function (index, book){
                 options += '<option value="'  + book.id + '">' + book.title + '</option>';
             });
             $('#books').append(options);
 
             $('#books').change(function () {
-                var bookId = $(this).find('option:selected').val();
-                var childrenInBooks = false;
-                var indexInBooks;
-                $.each(books.children, function (index, book) {
-                    if (book.id == bookId) {
-                        indexInBooks = index;
+                var selectedBookId = $(this).find('option:selected').val();
+                var childrenAlreadyInInventory = false;
+                var bookIndexInInventory;
+                //check if the selected book is already in inventory and if its children is also there
+                $.each(inventory.children, function (index, book) {
+                    if (book.id == selectedBookId) {
+                        bookIndexInInventory = index;
                         if (book.children) {
-                            childrenInBooks = true;
+                            childrenAlreadyInInventory = true;
                         }
                     }
                 });
 
-                if (!childrenInBooks) {
+                if (!childrenAlreadyInInventory) {
                     $.ajax(
                         {
-                            url : url.tocGet + bookId,
+                            async : false,
+                            url : url.tocGet + selectedBookId,
                             xhrFields: {
                                 withCredentials: true
                             },
@@ -223,7 +226,8 @@
                                     $('#login').show();
                                     $('#app').hide();
                                 } else if (response.id >= 0) {
-                                    books['children'][indexInBooks] = response;
+                                    //put the contents to books
+                                    inventory['children'][bookIndexInInventory] = response;
                                 }
                             },
                             error: function (response) {
