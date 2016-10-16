@@ -40,6 +40,14 @@
         );
     }
 
+    function filterText(responseText) {
+        var r = $('<div>' + responseText + '</div>');
+        var text = r.find('.Uvaca').text() + "\n";
+        text += ' ' + r.find('.Vers').text() + "\n";
+        text += ' ' + r.children('.Forditas').text();
+        return text;
+    }
+
     $.ajax(
         {
             async: false,
@@ -253,8 +261,34 @@
                 }
             });
 
+            $('#sel2').change(function () {
+                if ($(this).find(':selected').data('partial') == true) {
+                    //go deeper
+                } else {
+                    //get the sloka
+                    if ($.localStorage('sloka.' + $(this).val())) {
+                        //get from localStorage
+                    } else {
+                        //get it from the server
+                        $.ajax({
+                            url : url.sectionGo + $(this).val(),
+                            success : function (response) {
+                                text = filterText(response.text);
+                                /*$.localStorage(
+                                    'sloka.' + $(this).val(),
+                                    {
+                                        shortRef : response.shortRef,
+                                        text : text
+                                    }
+                                );*/
+                                loadText($.localStorage('sloka.step'));
+                            },
+                            error : function (response) {
+                                console.log(response);  // TODO
+                            }
+                        });
                     }
-                });
+                }
             });
         } else {
             $('#login').show();
