@@ -9,11 +9,13 @@
         url.base = '';
         url.root = 'pandit-toc-root.json';
         url.tocGet = 'pandit-toc-get-response.json-';
+        url.sectionGo = 'pandit-section-go-response.json?';
         url.auth = 'pandit-authenticate.json';
     } else {
         url.base = 'http://pandit.hu/app/';
         url.root = url.base + 'toc/root';
         url.tocGet = url.base + 'toc/get/';
+        url.sectionGo = url.base + 'section/go/';
         url.auth = url.base + 'auth/authenticate';
     }
 
