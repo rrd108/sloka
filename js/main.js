@@ -238,12 +238,18 @@
 
                 //update second select
                 $('#sel2 > option').detach();
-                $('#sel2').append('<option>--- válassz ---</option>');
-                $.each(books.children[indexInBooks].children, function (index, value){
-                    if (isAcceptableTitle(value.title)) {
                 if (availableBooks.indexOf(inventory.children[bookIndexInInventory].id) != -1) {
+                    $('#sel2').append('<option>--- válassz ---</option>');
+                    $.each(inventory.children[bookIndexInInventory].children, function (index, value) {
+                        if (isAcceptableTitle(value.title)) {
                             appendOptions(value);
                         }
+                    });
+                } else {
+                    $('#sel2').append('<option>- ebben a könyvben nincsenek slokák -</option>');
+                }
+            });
+
                     }
                 });
             });
