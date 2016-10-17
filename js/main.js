@@ -59,7 +59,7 @@
 
     function prepareVars() {
         var match, splitters = [];
-        var splitPattern = /[ \-\n]/g;  //szóköz, kötőjel, újsor
+        var splitPattern = /[ \-\n ]/g;  //szóköz, kötőjel, újsor, nemtommi whitespace
         //collect the indexes of split characters into splitters array
         while ((match = splitPattern.exec(text)) != null) {
             splitters.push(match.index);
