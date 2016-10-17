@@ -187,8 +187,99 @@
         );
     }
 
+    function buildObjForTocGet(selectedBookId, bookIndexInInventory) {
+        return {
+            async: false,
+            url: url.tocGet + selectedBookId,
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (response) {
+                if (response.error == 'expired') {
+                    $('#login').show();
+                    $('#app').hide();
+                } else if (response.id >= 0) {
+                    //put the contents to books
+                    inventory['children'][bookIndexInInventory] = response;
+                }
+            },
+            error: function (response) {
+                // TODO display some error message
+            }
+        };
+    }
+
+    function getBookFromInventory(selectedBookId) {
+        var bookIndexInInventory, childrenAlreadyInInventory;
+        //check if the selected book / part is already in inventory and if its children is also there
+        $.each(inventory.children, function (index, book) {
+            if (book.id == selectedBookId) {
+                bookIndexInInventory = index;
+                if (book.children) {
+                    childrenAlreadyInInventory = true;
+                }
+            }
+        });
+        return {
+            bookIndexInInventory: bookIndexInInventory,
+            childrenAlreadyInInventory: childrenAlreadyInInventory
+        };
+    }
+
+    function selectChangeHandler() {
+        var selectedBookId = $(this).val();
+        var nextSelectId = parseInt($(this).attr('id').replace('sel', '')) + 1;
+        for (var i = nextSelectId; i < 4; i++) {   //we have maximum 4 selects
+            $('#sel' + i).hide();
+        }
+        if ($(this).find(':selected').data('partial') == true) {
+            //go deeper
+            if ($.localStorage('sloka.id' + selectedBookId)) {
+                console.log('get from localStorage')
+            } else {
+                var __ret = getBookFromInventory(selectedBookId);
+                $.ajax(
+                    buildObjForTocGet(selectedBookId, __ret.bookIndexInInventory)
+                );
+            }
+            $.each(inventory.children[__ret.bookIndexInInventory].children, function (index, value) {
+                if (isAcceptableTitle(value.title)) {
+                    appendOptions($('#sel' + nextSelectId), value);
+                }
+            });
+            $('#sel' + nextSelectId).show();
+        } else {
+            //get the sloka
+            if ($.localStorage('sloka.id' + selectedBookId)) {
+                text = $.localStorage('sloka.id' + selectedBookId + '.text');
+                loadText($.localStorage('sloka.step'));
+            } else {
+                //get it from the server
+                $.ajax({
+                    url: url.sectionGo + selectedBookId,
+                    success: function (response) {
+                        text = filterText(response.text);
+                        var sloka = {};
+                        sloka['id' + selectedBookId] = {
+                            shortRef: response.shortRef,
+                            text: text
+                        };
+                        $.localStorage('sloka', sloka);
+                        loadText($.localStorage('sloka.step'));
+                    },
+                    error: function (response) {
+                        console.log(response);  // TODO
+                    }
+                });
+            }
+        }
+    }
+
     $(function() {      //onready
         if (inventory.id >= 0) {     //we are logged in to pandit
+
+            $('#sel3').hide();
+            $('#sel4').hide();
 
             //attach event handlers for nav images and load last verse from localStorage
             $('nav img').click(function (event) {
@@ -226,40 +317,16 @@
             $('#books').append(options);
 
             $('#books').change(function () {
+                $('#sel3').hide();
+                $('#sel4').hide();
                 var selectedBookId = $(this).find('option:selected').val();
-                var childrenAlreadyInInventory = false;
-                var bookIndexInInventory;
-                //check if the selected book is already in inventory and if its children is also there
-                $.each(inventory.children, function (index, book) {
-                    if (book.id == selectedBookId) {
-                        bookIndexInInventory = index;
-                        if (book.children) {
-                            childrenAlreadyInInventory = true;
-                        }
-                    }
-                });
+                var __ret = getBookFromInventory(selectedBookId);
+                var bookIndexInInventory = __ret.bookIndexInInventory;
+                var childrenAlreadyInInventory = __ret.childrenAlreadyInInventory;
 
                 if (!childrenAlreadyInInventory) {
                     $.ajax(
-                        {
-                            async : false,
-                            url : url.tocGet + selectedBookId,
-                            xhrFields: {
-                                withCredentials: true
-                            },
-                            success: function (response) {
-                                if (response.error == 'expired') {
-                                    $('#login').show();
-                                    $('#app').hide();
-                                } else if (response.id >= 0) {
-                                    //put the contents to books
-                                    inventory['children'][bookIndexInInventory] = response;
-                                }
-                            },
-                            error: function (response) {
-                                // TODO display some error message
-                            }
-                        }
+                        buildObjForTocGet(selectedBookId, bookIndexInInventory)
                     );
                 }
 
@@ -278,35 +345,13 @@
             });
 
             $('#sel2').change(function () {
-                var id = $(this).val();
-                if ($(this).find(':selected').data('partial') == true) {
-                    //go deeper
-                    console.log('Dig deeper');
-                } else {
-                    //get the sloka
-                    if ($.localStorage('sloka.id' + id)) {
-                        text = $.localStorage('sloka.id' + id + '.text');
-                        loadText($.localStorage('sloka.step'));
-                    } else {
-                        //get it from the server
-                        $.ajax({
-                            url : url.sectionGo + id,
-                            success : function (response) {
-                                text = filterText(response.text);
-                                var sloka = {};
-                                sloka['id' + id] = {
-                                    shortRef : response.shortRef,
-                                    text : text
-                                };
-                                $.localStorage('sloka', sloka);
-                                loadText($.localStorage('sloka.step'));
-                            },
-                            error : function (response) {
-                                console.log(response);  // TODO
-                            }
-                        });
-                    }
-                }
+                selectChangeHandler.call(this);
+            });
+            $('#sel3').change(function () {
+                selectChangeHandler.call(this);
+            });
+            $('#sel4').change(function () {
+                selectChangeHandler.call(this);
             });
         } else {
             $('#login').show();
