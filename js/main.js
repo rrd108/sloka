@@ -30,9 +30,9 @@
             || value.search(/mantra/i) != -1;
     }
 
-    function appendOptions(value) {
+    function appendOptions(select, value) {
         var d = value.partial ? ('data-partial="' + value.partial + '"') : '';
-        $('#sel2').append(
+        select.append(
             '<option value="' + value.id + '" ' + d + '>'
             + value.title +
             '</option>'
@@ -148,7 +148,7 @@
     //put BG chapters to sel2
         $.each(response.children[0].children, function (index, value) {
             if (isAcceptableTitle(value.title)) {
-                appendOptions(value);
+                appendOptions($('#sel2'), value);
             }
         });
     }
@@ -269,7 +269,7 @@
                     $('#sel2').append('<option>--- válassz ---</option>');
                     $.each(inventory.children[bookIndexInInventory].children, function (index, value) {
                         if (isAcceptableTitle(value.title)) {
-                            appendOptions(value);
+                            appendOptions($('#sel2'), value);
                         }
                     });
                 } else {
