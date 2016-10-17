@@ -1,39 +1,22 @@
 {
   "bookSegmentId":1,
-  "tocId":9,
+  "tocId":6,
   "last":0,
-  "text":"<p class=\"Versszam\" data-ix=\"182\">2. VERS</p>
-  <div class=\"VsWrap1\"><div class=\"VsWrap2\">
-    <p class=\"Uvaca\" data-ix=\"183\"><i>sañjaya uvāca</i></p>
-    <p class=\"Vers\" data-ix=\"184\"><i>dṛṣṭvā tu pāṇḍavānīkaṁ  
-    vyūḍhaṁ duryodhanas tadā<br/>ācāryam upasaṅgamya  rājā vacanam
-    abravīt</i></p></div></div>
-    <p class=\"Szavak\" data-ix=\"185\"><i>sañjayaḥ uvāca</i> – Sañjaya mondta;
-     <i>dṛṣṭvā</i> – miután megtekintette; <i>tu</i> –de; <i>pāṇḍava-anīkam</i>
-      – a Pāṇḍavák seregét; <i>vyūḍham</i> – hadi falanxot alkotva;
-      <i>duryodhanaḥ</i> – Duryodhana király; <i>tadā</i> – akkor;
-      <i>ācāryam</i> – a tanítóhoz; <i>upasaṅgamya</i> – fordulva;
-      <i>rājā</i> – a király; <i>vacanam</i> – szavakat; <i>abravīt</i>
-       – szólta.</p>
-    <p class=\"Forditas\" data-ix=\"186\"><b>Sañjaya így szólt: Ó,
-    uralkodó! Duryodhana király megtekintette a Pāṇḍu fiai által hadrendbe
-    állított sereget, majd tanárához lépett, s a következő szavakat intézte
-    hozzá:</b></p>
-    <p class=\"TorzsKezdet\" data-ix=\"187\">MAGYARÁZAT: 
-    Dhṛtarāṣṭra vakon született, és sajnos lelki látóképességgel sem
-    rendelkezett. Jól tudta, hogy a vallás tekintetében fiai éppoly vakok,
-    mint ő maga, s abban is biztos volt, hogy sohasem lennének képesek
-    megegyezni a Pāṇḍavákkal, akik születésük óta mindannyian jámbor hívők
-    voltak. Mindazonáltal a zarándokhely befolyása miatt kétségek gyötörték.
-    Sañjaya megértette, miért kérdezi őt Dhṛtarāṣṭra a csata alakulásáról,
-    ezért bátorítani akarta az elcsüggedt királyt, s megnyugtatta, hogy fiai
-    nem fognak megalkudni a szent hely befolyása ellenére sem. Sañjaya elmondta
-    a királynak, hogy fia, Duryodhana megtekintette a Pāṇḍavák haderejét,
-    majd azonnal a legfőbb hadvezérhez, Droṇācāryához sietett, hogy
-    tájékoztassa őt a valós helyzetről. Habár Duryodhanát a vers királynak
-    nevezi, a helyzet komolyságára való tekintettel mégis a fő hadvezérhez
-    kellett fordulnia. Nagyon ügyes politikus volt, ám még diplomatikus
-    viselkedésével sem tudta leplezni azt a félelmet, amit a Pāṇḍavák
-    alakulatainak láttán érzett.</p>",
-  "shortRef":"BhG.1.2"
+  "text":"<p class=\"Fejezetszam\" data-ix=\"171\">ELSŐ FEJEZET</p>
+  <p class=\"Fejezetcim\" data-ix=\"172\">Hadiszemle a kurukṣetrai csatamezőn</p>
+  <p class=\"Versszam\" data-ix=\"173\">1. VERS</p>
+  <div class=\"VsWrap1\">
+  <div class=\"VsWrap2\">
+  <p class=\"Uvaca\" data-ix=\"174\"><i>dhṛtarāṣṭra uvāca</i></p>
+  <p class=\"Vers\" data-ix=\"175\"><i>dharma-kṣetre kuru-kṣetre  samavetā yuyutsavaḥ<br/>māmakāḥ pāṇḍavāś caiva  kim akurvata sañjaya</i></p>
+  </div>
+  </div>
+  <p class=\"Szavak\" data-ix=\"176\"><i>dhṛtarāṣṭraḥ uvāca</i> – Dhṛtarāṣṭra király mondta; <i>dharma-kṣetre</i> – a zarándokhelyen; <i>kuru-kṣetre</i> – a Kurukṣetra nevű vidéken; <i>samavetāḥ</i> – összegyűltek; <i>yuyutsavaḥ</i> – harcra vágyva; <i>māmakāḥ</i> – az enyéim (a fiaim); <i>pāṇḍavāḥ</i> – Pāṇḍu fiai; <i>ca</i>– és; <i>eva</i> – bizony; <i>kim</i> – mit; <i>akurvata</i> –tettek; <i>sañjaya</i> – ó, Sañjaya.</p>
+  <p class=\"Forditas\" data-ix=\"177\"><b>Dhṛtarāṣṭra így szólt: Ó, Sañjaya, mit tettek fiaim és Pāṇḍu fiai, miután harcra vágyva összegyűltek a kurukṣetrai zarándokhelyen?</b></p>
+  <p class=\"TorzsKezdet\" data-ix=\"178\">MAGYARÁZAT: A <i>Bhagavad-gītā</i> széles körben olvasott teista tudomány. Összefoglalása a <i>Gītā-māhātmya</i> (A <i>Gītā</i> dicsőítése), amely kijelenti, hogy a <i>Bhagavad-gītāt</i>nagyon alaposan, egy olyan ember segítségével kell tanulmányoznunk, aki Śrī Kṛṣṇa híve, s emellett mindenönös célú értelmezés nélkül kell törekednünk a megértésére. A világos megértésre, arra, hogyan kelle tudást elsajátítanunk, magában a <i>Bhagavad-gītāban</i> találunk példát Arjuna személyében, aki közvetlenül az Úrtól hallotta ezt a tanítást. Aki olyan szerencsés, hogy a <i>Bhagavad-gītāt</i> e tanítványi láncon, s nem egy személyes indítékoktól vezérelt magyarázaton keresztül értette meg, arról elmondhatjuk, hogy már a teljes védikus tudományt és a világ minden szentírását tanulmányozta. A <i>Bhagavad-gītāban </i>az olvasó megtalálja mindazt, amit valamennyi egyéb szentírás tartalmaz, s ezenkívül olyan dolgokkalis találkozhat, amelyekről sehol máshol nem olvashat. Ez a <i>Bhagavad-gītā</i> különleges jellemzője. A tökéletes teista tudományt tartalmazza, hiszen maga az Istenség Legfelsőbb Személyisége, az Úr Śrī Kṛṣṇa beszéli el.</p>
+  <p class=\"TorzsKoveto\" data-ix=\"179\">Dhṛtarāṣṭra és Sañjaya párbeszéde – amita <i>Mahābhāratában</i> olvashatunk – alkotja e nagyszerű bölcsesség alapját. Köztudott, hogy ez a filozófia a kurukṣetrai csatamezőn keletkezett, amely időtlen idők óta, a védikus időktől kezdve szent zarándokhely. Maga az Úr beszélte el, amikor személyesen jelen volt ezen a bolygón, hogy útmutatással lássa el az emberiséget.</p>
+  <p class=\"TorzsKoveto\" data-ix=\"180\">A <i>dharma-kṣetra</i> (vallási rítusok helye) szónak nagy jelentősége van, mert a kurukṣetrai csatamezőn az Istenség Legfelsőbb Személyisége is jelen volt, Arjuna oldalán. Dhṛtarāṣṭra, a Kuruk atyja erősen kételkedett fiai végső győzelmében. Bizonytalanságában Sañjayától, tanácsosától érdeklődött: „Mi történt?” Abban biztos volt, hogyfiai, valamint öccse, Pāṇḍu fiai azért gyűltek össze a kurukṣetrai harctéren, hogy döntő csatát vívjanakegymással. Kérdése mégis jelentős. Nem akart egyezkedést az unokatestvérek és testvérek között, s tudniakarta, mi vár a csatamezőn felsorakozott fiaira. A csata helyszínéül Kurukṣetrát választották – amiről a Védák azt írják, e helyen Istent kell imádniuk még a mennyek félisteneinek is –, ezért Dhṛtarāṣṭra attól tartott, hogy a szent hely befolyásolhatja a csata kimenetelét. Nagyon jól tudta, hogy ez Arjunának és Pāṇḍu többi fiának kedvez majd, akik természetüknél fogva mind nagyon erényesek voltak. SañjayaVyāsa tanítványa volt, és Vyāsa kegyéből képes volt arra, hogy lássa a kurukṣetrai csatateret, annakellenére, hogy Dhṛtarāṣṭra szobájában tartózkodott. Dhṛtarāṣṭra tehát őt kérdezte a csatamezőn történtekről.</p>
+  <p class=\"TorzsKoveto\" data-ix=\"181\">A Pāṇḍavák és Dhṛtarāṣṭra fiai ugyanahhoz a családhoz tartoztak. Ez a vers azonban felfedi előttünk Dhṛtarāṣṭra elméjét, aki szándékosan csak saját fiaitvolt hajlandó Kurukként elismerni, míg Pāṇḍu fiait kizárta a családi örökségből. Ennek alapján megérthetjük Dhṛtarāṣṭrának az unokaöccseihez, Pāṇḍu fiaihoz fűződő viszonyát. A történet kezdetétől fogva sejthetjük, hogy ahogyan a rizsföldön a nem odavaló gyomokat távolítják el, úgy fogja Kurukṣetra szent mezején Śrī Kṛṣṇa, a vallás atyja kiirtani a nemkívánatos gazt, Dhṛtarāṣṭra fiát, Duryodhanát és társait,hogy helyükbe a valóban vallásosakat állítsa, akiket Yudhiṣṭhira vezetett. Ez tehát a <i>dharma-kṣetre</i> és a <i>kuru-kṣetre</i> szavak jelentése történelmi és védikus jelentéstartalmuk mellett.</p>
+  ",
+  "shortRef":"BhG.1.1"
 }
