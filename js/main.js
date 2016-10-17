@@ -265,25 +265,27 @@
             });
 
             $('#sel2').change(function () {
+                var id = $(this).val();
                 if ($(this).find(':selected').data('partial') == true) {
                     //go deeper
+                    console.log('Dig deeper');
                 } else {
                     //get the sloka
-                    if ($.localStorage('sloka.' + $(this).val())) {
-                        //get from localStorage
+                    if ($.localStorage('sloka.id' + id)) {
+                        text = $.localStorage('sloka.id' + id + '.text');
+                        loadText($.localStorage('sloka.step'));
                     } else {
                         //get it from the server
                         $.ajax({
-                            url : url.sectionGo + $(this).val(),
+                            url : url.sectionGo + id,
                             success : function (response) {
                                 text = filterText(response.text);
-                                /*$.localStorage(
-                                    'sloka.' + $(this).val(),
-                                    {
-                                        shortRef : response.shortRef,
-                                        text : text
-                                    }
-                                );*/
+                                var sloka = {};
+                                sloka['id' + id] = {
+                                    shortRef : response.shortRef,
+                                    text : text
+                                };
+                                $.localStorage('sloka', sloka);
                                 loadText($.localStorage('sloka.step'));
                             },
                             error : function (response) {
