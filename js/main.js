@@ -43,10 +43,10 @@
         var r = $('<div>' + responseText + '</div>');
         var text = r.find('.Uvaca').text() + "\n";
         text += ' ' + r.find('.Vers').html()
-                .replace(/<\/*i>/, '')
-                //a responseban igazából <br/> van, de ha rra akarunk cserélni akkor
-                // bennemarad valamiért a szövegben, így viszont jó FF-ban
-                .replace('<br>', "\n") + "\n\n";
+            .replace(/<\/*i>/g, '')
+            //a responseban igazából <br/> van, de ha rra akarunk cserélni akkor
+            // bennemarad valamiért a szövegben, így viszont jó FF-ban
+            .replace('<br>', "\n") + "\n\n";
         text += ' ' + r.children('.Forditas').text();
         return text;
     }
