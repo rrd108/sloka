@@ -98,19 +98,15 @@ p {
 header, footer {
     background-color: #0a0;
     width: 100%;
-    position: fixed;
-}
-
-header {
-    top: 0;
 }
 
 footer {
     bottom: 0;
+    position: fixed;
 }
 
 nav, #login > p {
-    padding: 2em 1em 1em 1em;
+    padding: 1em;
 }
 
 nav img {
