@@ -18,7 +18,7 @@
         url.base = 'http://pandit.hu/app/';
         url.root = url.base + 'toc/root';
         url.tocGet = url.base + 'toc/get/';
-        url.sectionGo = url.base + 'section/go/';
+        url.sectionGo = url.base + 'txt/section/go/';
         url.auth = url.base + 'auth/authenticate';
     }
 
