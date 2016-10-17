@@ -2,9 +2,8 @@
 
     var inventory = {};
     var url = {};
-    // TODO add other book ids
-    var availableBooks = [1, 22894];    //books with slokas
-    //['BG', 'NOI', 'ISO', 'CC', SB]
+    var availableBooks = [1, 729, 11365, 22894, 22996];    //books with slokas
+    //['BG', 'SB', 'CC', 'NOI', 'ISO']
     var text = '';
 
     var test = false;
