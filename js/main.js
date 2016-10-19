@@ -27,6 +27,7 @@
             || value.search(/līlā/i) != -1
             || value.search(/fejezet/i) != -1
             || value.search(/vers/i) != -1
+            || value.search(/\d+\./i) != -1     //for CC verses we just get verse number like 32.
             || value.search(/mantra/i) != -1;
     }
 
