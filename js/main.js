@@ -243,40 +243,42 @@
         }
     }
 
+    function initializeInventory() {
+        //we need this to do not allow users full offline usage
+        $.ajax(
+            {
+                async: false,
+                url: url.root,
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function (response) {
+                    if (response.id == 0) {
+                        //the user is logged in to pandit
+                        inventory = response;
+                        var sloka = {};
+                        sloka['id0'] = response;
+                        $.localStorage('sloka', sloka);
+                        generateSel2(response);
+                    }
+                    // if we are not logged in we will not have anything in inventory - handled in onready
+                },
+                error: function (response) {
+                    // TODO display some error message
+                    alert('Valami hiba történt');
+                }
+            }
+        );
+    }
+
+    // TODO inventory = localStorage - be careful about how to detect login session
+
     $.localStorage(
         'sloka',
         ($.localStorage('sloka') ? $.localStorage('sloka') : {step : 1})
     );
 
-    //check if we are logged in and update root
-    //we need this to do not allow users full offline usage
-    $.ajax(
-        {
-            async: false,
-            url: url.root,
-            xhrFields: {
-                withCredentials: true
-            },
-            success: function (response) {
-                if (response.id == 0) {
-                    //the user is logged in to pandit
-                    inventory = response;
-                    var sloka = {};
-                    sloka['id0'] = response;
-                    $.localStorage('sloka', sloka);
-                    generateSel2(response);
-                } else {
-                    //display log in to pandit and hide other parts
-                    $('#login').show();
-                    $('#app').hide();
-                }
-            },
-            error: function (response) {
-                // TODO display some error message
-                alert('Valami hiba történt');
-            }
-        }
-    );
+    initializeInventory();
 
     $(function() {      //onready
         if (inventory.id >= 0) {     //we are logged in to pandit
@@ -373,6 +375,7 @@
                         if (response.ok) {
                             //we are logged in
                             $('#login').hide();
+                            initializeInventory();
                             $('#app').show();
                         }
                         // TODO response.message.search('csak 1 eszközön') != -1
