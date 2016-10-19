@@ -226,11 +226,17 @@
         };
     }
 
+    function removeSelect(select) {
+        select.empty();
+        select.append('<option>--- válassz ---</option>');
+        select.hide();
+    }
+
     function selectChangeHandler() {
         var selectedBookId = $(this).val();
         var nextSelectId = parseInt($(this).attr('id').replace('sel', '')) + 1;
         for (var i = nextSelectId; i < 4; i++) {   //we have maximum 4 selects
-            $('#sel' + i).hide();
+            removeSelect($('#sel' + i));
         }
         if ($(this).find(':selected').data('partial') == true) {
             //go deeper
@@ -278,8 +284,8 @@
     $(function() {      //onready
         if (inventory.id >= 0) {     //we are logged in to pandit
 
-            $('#sel3').hide();
-            $('#sel4').hide();
+            removeSelect($('#sel3'));
+            removeSelect($('#sel4'));
 
             //attach event handlers for nav images and load last verse from localStorage
             $('nav img').click(function (event) {
@@ -317,8 +323,9 @@
             $('#books').append(options);
 
             $('#books').change(function () {
-                $('#sel3').hide();
-                $('#sel4').hide();
+                removeSelect($('#sel2'));
+                removeSelect($('#sel3'));
+                removeSelect($('#sel4'));
                 var selectedBookId = $(this).find('option:selected').val();
                 var __ret = getBookFromInventory(selectedBookId);
                 var bookIndexInInventory = __ret.bookIndexInInventory;
@@ -331,9 +338,7 @@
                 }
 
                 //update second select
-                $('#sel2 > option').detach();
                 if (availableBooks.indexOf(inventory.children[bookIndexInInventory].id) != -1) {
-                    $('#sel2').append('<option>--- válassz ---</option>');
                     $.each(inventory.children[bookIndexInInventory].children, function (index, value) {
                         if (isAcceptableTitle(value.title)) {
                             appendOptions($('#sel2'), value);
