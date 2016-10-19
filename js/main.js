@@ -316,9 +316,14 @@
             loadText($.localStorage('sloka.step'));
 
             //build select for books
-            var options = '';
+            var options = '',
+                disabled = '';
             $.each(inventory.children, function (index, book){
-                options += '<option value="'  + book.id + '">' + book.title + '</option>';
+                options += '<option value="' + book.id + '"';
+                if (availableBooks.indexOf(book.id) == -1 ) {
+                    options += ' disabled';
+                }
+                options += '>' + book.title + '</option>';
             });
             $('#books').append(options);
 
@@ -338,15 +343,12 @@
                 }
 
                 //update second select
-                if (availableBooks.indexOf(inventory.children[bookIndexInInventory].id) != -1) {
-                    $.each(inventory.children[bookIndexInInventory].children, function (index, value) {
-                        if (isAcceptableTitle(value.title)) {
-                            appendOptions($('#sel2'), value);
-                        }
-                    });
-                } else {
-                    $('#sel2').append('<option>- ebben a könyvben nincsenek slokák -</option>');
-                }
+                $('#sel2').show();
+                $.each(inventory.children[bookIndexInInventory].children, function (index, value) {
+                    if (isAcceptableTitle(value.title)) {
+                        appendOptions($('#sel2'), value);
+                    }
+                });
             });
 
             $('#sel2').change(function () {
