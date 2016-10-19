@@ -377,6 +377,8 @@
                             $('#login').hide();
                             initializeInventory();
                             $('#app').show();
+                        } else if (response.fail) {
+                            alert('Hibás bejelentkezési név vagy jelszó!'); // TODO
                         }
                         // TODO response.message.search('csak 1 eszközön') != -1
                     },
