@@ -146,7 +146,7 @@
     );
 
     function generateSel2(response) {
-    //put BG chapters to sel2
+        //put BG chapters to sel2
         $.each(response.children[0].children, function (index, value) {
             if (isAcceptableTitle(value.title)) {
                 appendOptions($('#sel2'), value);
