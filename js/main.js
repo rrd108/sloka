@@ -2,7 +2,7 @@
 
     var inventory = {};
     var url = {};
-    var availableBooks = [1, 729, 11365, 22894, 22996];    //books with slokas
+    var allowedBooks = [1, 729, 11365, 22894, 22996];    //books with slokas
     //['BG', 'SB', 'CC', 'NOI', 'ISO']
     var text = '';
 
@@ -321,7 +321,7 @@
                 disabled = '';
             $.each(inventory.children, function (index, book){
                 options += '<option value="' + book.id + '"';
-                if (availableBooks.indexOf(book.id) == -1 ) {
+                if (allowedBooks.indexOf(book.id) == -1 ) {
                     options += ' disabled';
                 }
                 options += '>' + book.title + '</option>';
