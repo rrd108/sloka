@@ -140,11 +140,6 @@
         img.attr('src', img.attr('src').replace('-filled', ''));
     }
 
-    $.localStorage(
-        'sloka',
-        ($.localStorage('sloka') ? $.localStorage('sloka') : {step : 1})
-    );
-
     function generateSel2(response) {
         //put BG chapters to sel2
         $.each(response.children[0].children, function (index, value) {
@@ -152,40 +147,6 @@
                 appendOptions($('#sel2'), value);
             }
         });
-    }
-
-    //get root
-    if ($.localStorage('sloka.id0')) {
-        inventory = $.localStorage('sloka.id0')
-        generateSel2(inventory);
-    } else {
-        $.ajax(
-            {
-                async: false,
-                url: url.root,
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function (response) {
-                    if (response.id == 0) {
-                        //the user is logged in to pandit
-                        inventory = response;
-                        var sloka = {};
-                        sloka['id0'] = response;
-                        $.localStorage('sloka', sloka);
-                        generateSel2(response);
-                    } else {
-                        //display log in to pandit and hide other parts
-                        $('#login').show();
-                        $('#app').hide();
-                    }
-                },
-                error: function (response) {
-                    // TODO display some error message
-                    alert('Valami hiba történt');
-                }
-            }
-        );
     }
 
     function buildObjForTocGet(selectedBookId, bookIndexInInventory) {
@@ -280,6 +241,45 @@
                 });
             }
         }
+    }
+
+    $.localStorage(
+        'sloka',
+        ($.localStorage('sloka') ? $.localStorage('sloka') : {step : 1})
+    );
+
+    //get root
+    if ($.localStorage('sloka.id0')) {
+        inventory = $.localStorage('sloka.id0');
+        generateSel2(inventory);
+    } else {
+        $.ajax(
+            {
+                async: false,
+                url: url.root,
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function (response) {
+                    if (response.id == 0) {
+                        //the user is logged in to pandit
+                        inventory = response;
+                        var sloka = {};
+                        sloka['id0'] = response;
+                        $.localStorage('sloka', sloka);
+                        generateSel2(response);
+                    } else {
+                        //display log in to pandit and hide other parts
+                        $('#login').show();
+                        $('#app').hide();
+                    }
+                },
+                error: function (response) {
+                    // TODO display some error message
+                    alert('Valami hiba történt');
+                }
+            }
+        );
     }
 
     $(function() {      //onready
