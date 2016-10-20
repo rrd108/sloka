@@ -50,7 +50,7 @@
             .replace(/<\/*i>/g, '')
             //a responseban igazából <br/> van, de ha arra akarunk cserélni akkor
             // bennemarad valamiért a szövegben, így viszont jó FF-ban
-            .replace('<br>', "\n") + "\n\n";
+            .replace(/<br>/g, "\n") + "\n\n";
         text += ' ' + r.children('.Forditas').text();
         return text;
     }
