@@ -222,6 +222,7 @@
             if ($.localStorage('sloka.id' + selectedBookId)) {  // TODO inventory
                 text = $.localStorage('sloka.id' + selectedBookId + '.text');
                 loadText($.localStorage('sloka.step'));
+                $('#shortref').text($.localStorage('sloka.id' + selectedBookId + '.shortRef'));
             } else {
                 //get it from the server
                 $.ajax({
@@ -235,6 +236,7 @@
                         };
                         $.localStorage('sloka', sloka); // TODO inventory
                         loadText($.localStorage('sloka.step'));
+                        $('#shortref').text(response.shortRef);
                     },
                     error: function (response) {
                         alert('Valami gáz van típusú hibába botlottam! (selectChangeHandler)');    // TODO display some error message

@@ -92,7 +92,8 @@ body {
 }
 
 p {
-    padding: .7em;
+    padding: 0 .7em;
+    margin: 0;
 }
 
 header, footer {
@@ -115,6 +116,16 @@ nav img {
 
 span.unseen {
     color: #fff;
+}
+
+#shortref {
+    margin: .5em;
+    padding: .5em;
+    float: left;
+    background-color: #0a0;
+    font-weight: bold;
+    color: #fff;
+    border-radius: .5em;
 }
 
 /* ==========================================================================
