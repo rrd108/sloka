@@ -9,11 +9,14 @@
     var test = false;
 
     if (test) {
-        url.base = '';
-        url.root = 'pandit-toc-root.json';
-        url.tocGet = 'pandit-toc-get-response.json-';
-        url.sectionGo = 'pandit-section-go-response.json?';
-        url.auth = 'pandit-authenticate.json';
+        url = {
+            base : '',
+            root : 'pandit-toc-root.json',
+            tocGet : 'pandit-toc-get-response.json-',
+            sectionGo : 'pandit-section-go-response.json?',
+            auth : 'pandit-authenticate.json',
+            expired : 'pandit-expired.json'
+        };
     } else {
         url.base = 'http://pandit.hu/app/';
         url.root = url.base + 'toc/root';
