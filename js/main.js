@@ -389,6 +389,7 @@
                             //we are logged in
                             $('#login').hide();
                             initializeInventory();
+                            initializeApp();
                             $('#app').show();
                         } else if (response.fail) {
                             alert('Hibás bejelentkezési név vagy jelszó!'); // TODO
