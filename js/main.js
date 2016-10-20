@@ -45,13 +45,13 @@
 
     function filterText(responseText) {
         var r = $('<div>' + responseText + '</div>');
-        var text = r.find('.Uvaca').text() + "\n";
-        text += ' ' + r.find('.Vers').html()        //we want to keep \n so text() will not be good
+        var text = r.find('.Uvaca').text() ? r.find('.Uvaca').text() + "\n" + ' ' : '';
+        text += r.find('.Vers').html()        //we want to keep \n so text() will not be good
             .replace(/<\/*i>/g, '')
             //a responseban igazából <br/> van, de ha arra akarunk cserélni akkor
             // bennemarad valamiért a szövegben, így viszont jó FF-ban
-            .replace(/<br>/g, "\n") + "\n\n";
-        text += ' ' + r.children('.Forditas').text();
+            .replace(/<br>/g, "\n");
+        text += "\n\n" + r.children('.Forditas').text();
         return text;
     }
 
