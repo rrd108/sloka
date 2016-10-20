@@ -116,7 +116,7 @@
     }
 
     function loadText(num) {
-        $.localStorage('sloka.step', num);
+        $.localStorage('sloka.step', num);  // TODO inventory
         if (num == 1) {
             makeAllTextVisible();
         } else if (num == 2) {
@@ -203,7 +203,7 @@
         }
         if ($(this).find(':selected').data('partial') == true) {
             //go deeper
-            if ($.localStorage('sloka.id' + selectedBookId)) {
+            if ($.localStorage('sloka.id' + selectedBookId)) {  // TODO inventory
                 console.log('get from localStorage')
             } else {
                 var __ret = getBookFromInventory(selectedBookId);
@@ -219,7 +219,7 @@
             $('#sel' + nextSelectId).show();
         } else {
             //get the sloka
-            if ($.localStorage('sloka.id' + selectedBookId)) {
+            if ($.localStorage('sloka.id' + selectedBookId)) {  // TODO inventory
                 text = $.localStorage('sloka.id' + selectedBookId + '.text');
                 loadText($.localStorage('sloka.step'));
             } else {
@@ -233,7 +233,7 @@
                             shortRef: response.shortRef,
                             text: text
                         };
-                        $.localStorage('sloka', sloka);
+                        $.localStorage('sloka', sloka); // TODO inventory
                         loadText($.localStorage('sloka.step'));
                     },
                     error: function (response) {
@@ -246,6 +246,7 @@
 
     function initializeInventory() {
         //we need this to do not allow users full offline usage
+        // TODO switch this to a 30 days renewal - login could be happen any time when a missing book or text is requested
         $.ajax(
             {
                 async: false,
@@ -259,7 +260,7 @@
                         inventory = response;
                         var sloka = {};
                         sloka['id0'] = response;
-                        $.localStorage('sloka', sloka);
+                        $.localStorage('sloka', sloka); // TODO inventory
                         generateSel2(response);
                     }
                     // if we are not logged in we will not have anything in inventory - handled in onready
