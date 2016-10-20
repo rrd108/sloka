@@ -92,7 +92,6 @@
         $.each(v.words, function (index, word) {
             var spanPos = parseInt(word.length / 2);
             var modifiedWord = word.substr(0, spanPos) +
-                //'<span class="invisible">' +
                 '<span class="unseen">' +
                 word.substr(spanPos, word.length - spanPos) +
                 '</span>';
@@ -108,7 +107,6 @@
         $.each(v.words, function (index, word) {
             var spanPos = parseInt(word.length - 1);
             var modifiedWord = word.substr(0, 1) +
-                //'<span class="invisible">' +
                 '<span class="unseen">' +
                 word.substr(1, spanPos) +
                 '</span>';
