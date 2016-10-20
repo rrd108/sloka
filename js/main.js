@@ -249,12 +249,12 @@
         // TODO switch this to a 30 days renewal - login could be happen any time when a missing book or text is requested
         $.ajax(
             {
-                async: false,
-                url: url.root,
-                xhrFields: {
+                async : false,
+                url : url.root,
+                xhrFields : {
                     withCredentials: true
                 },
-                success: function (response) {
+                success : function (response) {
                     if (response.id == 0) {
                         //the user is logged in to pandit
                         inventory = response;
@@ -265,7 +265,7 @@
                     }
                     // if we are not logged in we will not have anything in inventory - handled in onready
                 },
-                error: function (response) {
+                error : function (response) {
                     // TODO display some error message
                     alert('Valami hiba történt');
                 }
