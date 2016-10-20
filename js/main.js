@@ -276,14 +276,13 @@
     }
 
     function addNavHandlers() {
-        //attach event handlers for nav images and load last verse from localStorage
+        //attach event handlers for nav images
         $('nav img').click(function (event) {
             $('nav img').each(function () {
                 if (event.target == this) {
                     var num = $(this).attr('src').replace('.png', '')
                         .replace('img/', '')
                         .replace('-filled', '');
-                    loadText(num);
                     addFilledToImgSrc($(this));
                 } else {
                     removeFilledFromImgSrc($(this));
