@@ -167,7 +167,7 @@
                 }
             },
             error: function (response) {
-                // TODO display some error message
+                alert('Valami gáz van típusú hibába botlottam! (buildObjForTocGet)');    // TODO display some error message
             }
         };
     }
@@ -237,7 +237,7 @@
                         loadText($.localStorage('sloka.step'));
                     },
                     error: function (response) {
-                        console.log(response);  // TODO
+                        alert('Valami gáz van típusú hibába botlottam! (selectChangeHandler)');    // TODO display some error message
                     }
                 });
             }
@@ -384,7 +384,7 @@
                         // TODO response.message.search('csak 1 eszközön') != -1
                     },
                     error: function (response) {
-                        console.log(response);  // TODO
+                        alert('Valami gáz van típusú hibába botlottam! (onReady)');    // TODO display some error message
                     }
                 });
             });
