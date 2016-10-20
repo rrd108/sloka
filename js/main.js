@@ -273,6 +273,93 @@
         );
     }
 
+    function addNavHandlers() {
+        //attach event handlers for nav images and load last verse from localStorage
+        $('nav img').click(function (event) {
+            $('nav img').each(function () {
+                if (event.target == this) {
+                    var num = $(this).attr('src').replace('.png', '')
+                        .replace('img/', '')
+                        .replace('-filled', '');
+                    loadText(num);
+                    addFilledToImgSrc($(this));
+                } else {
+                    removeFilledFromImgSrc($(this));
+                }
+            });
+        });
+    }
+
+    function addSpanHandlers() {
+        //we use .on() as it will work with later dynamically created spans
+        $('p').on('click', 'span', function () {
+            $(this).removeClass('unseen');
+            $(this).delay(2000).queue(function () {
+                $(this).addClass('unseen');
+            });
+        });
+    }
+
+    function buildBookSelect() {
+        var options = '',
+            disabled = '';
+        $.each(inventory.children, function (index, book) {
+            options += '<option value="' + book.id + '"';
+            if (allowedBooks.indexOf(book.id) == -1) {
+                options += ' disabled';
+            }
+            options += '>' + book.title + '</option>';
+        });
+        $('#books').append(options);
+
+        $('#books').change(function () {
+            removeSelect($('#sel2'));
+            removeSelect($('#sel3'));
+            removeSelect($('#sel4'));
+            var selectedBookId = $(this).find('option:selected').val();
+            var __ret = getBookFromInventory(selectedBookId);
+            var bookIndexInInventory = __ret.bookIndexInInventory;
+            var childrenAlreadyInInventory = __ret.childrenAlreadyInInventory;
+
+            if (!childrenAlreadyInInventory) {
+                $.ajax(
+                    buildObjForTocGet(selectedBookId, bookIndexInInventory)
+                );
+            }
+
+            //update second select
+            $('#sel2').show();
+            $.each(inventory.children[bookIndexInInventory].children, function (index, value) {
+                if (isAcceptableTitle(value.title)) {
+                    appendOptions($('#sel2'), value);
+                }
+            });
+        });
+    }
+
+    function addSelectHandlers() {
+        removeSelect($('#sel3'));
+        removeSelect($('#sel4'));
+        $('#sel2').change(function () {
+            selectChangeHandler.call(this);
+        });
+        $('#sel3').change(function () {
+            selectChangeHandler.call(this);
+        });
+        $('#sel4').change(function () {
+            selectChangeHandler.call(this);
+        });
+    }
+
+    function initializeApp() {
+        addSelectHandlers();
+        addNavHandlers();
+        addSpanHandlers();
+        addFilledToImgSrc($('#s' + $.localStorage('sloka.step')));  // TODO inventory
+        loadText($.localStorage('sloka.step')); // TODO inventory
+        buildBookSelect();
+    }
+
     // TODO inventory = localStorage - be careful about how to detect login session
 
     $.localStorage(
@@ -284,83 +371,7 @@
 
     $(function() {      //onready
         if (inventory.id >= 0) {     //we are logged in to pandit
-
-            removeSelect($('#sel3'));
-            removeSelect($('#sel4'));
-
-            //attach event handlers for nav images and load last verse from localStorage
-            $('nav img').click(function (event) {
-                $('nav img').each(function () {
-                    if (event.target == this) {
-                        var num = $(this).attr('src').replace('.png', '')
-                            .replace('img/', '')
-                            .replace('-filled', '');
-                        loadText(num);
-                        addFilledToImgSrc($(this));
-                    } else {
-                        removeFilledFromImgSrc($(this));
-                    }
-                });
-            });
-
-            //attach event handlers to spans
-            //we use .on() as it will work with later dynamically created spans
-            $('p').on('click', 'span', function () {
-                $(this).removeClass('unseen');
-                $(this).delay(2000).queue(function () {
-                    $(this).addClass('unseen');
-                });
-            });
-
-            addFilledToImgSrc($('#s' + $.localStorage('sloka.step')));
-
-            loadText($.localStorage('sloka.step'));
-
-            //build select for books
-            var options = '',
-                disabled = '';
-            $.each(inventory.children, function (index, book){
-                options += '<option value="' + book.id + '"';
-                if (allowedBooks.indexOf(book.id) == -1 ) {
-                    options += ' disabled';
-                }
-                options += '>' + book.title + '</option>';
-            });
-            $('#books').append(options);
-
-            $('#books').change(function () {
-                removeSelect($('#sel2'));
-                removeSelect($('#sel3'));
-                removeSelect($('#sel4'));
-                var selectedBookId = $(this).find('option:selected').val();
-                var __ret = getBookFromInventory(selectedBookId);
-                var bookIndexInInventory = __ret.bookIndexInInventory;
-                var childrenAlreadyInInventory = __ret.childrenAlreadyInInventory;
-
-                if (!childrenAlreadyInInventory) {
-                    $.ajax(
-                        buildObjForTocGet(selectedBookId, bookIndexInInventory)
-                    );
-                }
-
-                //update second select
-                $('#sel2').show();
-                $.each(inventory.children[bookIndexInInventory].children, function (index, value) {
-                    if (isAcceptableTitle(value.title)) {
-                        appendOptions($('#sel2'), value);
-                    }
-                });
-            });
-
-            $('#sel2').change(function () {
-                selectChangeHandler.call(this);
-            });
-            $('#sel3').change(function () {
-                selectChangeHandler.call(this);
-            });
-            $('#sel4').change(function () {
-                selectChangeHandler.call(this);
-            });
+            initializeApp();
         } else {
             $('#login').show();
             $('#app').hide();
