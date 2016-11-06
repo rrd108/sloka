@@ -243,6 +243,7 @@
                 },
                 success : function (response) {
                     if (response.id == 0) {
+                        inventory.loggedin = true;
                         //the user is logged in to pandit
                         inventory.id0 = response;
                         generateSel2(response);
@@ -348,7 +349,7 @@
     initializeInventory();
 
     $(function() {      //onready
-        if (inventory.logedin === true) {     //we are logged in to pandit
+        if (inventory.loggedin === true) {     //we are logged in to pandit
             initializeApp();
         } else {
             $('#login').show();
