@@ -393,7 +393,7 @@
     });
 
     $(window).on('unload', function () {
-        //$.localStorage('sloka', inventory);
+        $.localStorage('sloka', inventory);
     });
 
 })(jQuery);
