@@ -307,12 +307,16 @@
     }
 
     function buildBookSelect() {
+    function buildBookSelect(bookId) {
         var options = '',
             disabled = '';
         $.each(inventory.id0.children, function (index, book) {
             options += '<option value="' + book.id + '"';
             if (allowedBooks.indexOf(book.id) == -1) {
                 options += ' disabled';
+            }
+            if (bookId == 'id' + book.id) {
+                options += ' selected';
             }
             options += '>' + book.title + '</option>';
         });
@@ -359,7 +363,7 @@
         addSpanHandlers();
         addFilledToImgSrc($('#s' + inventory.step));
         loadText();
-        buildBookSelect();
+        buildBookSelect(bookId);
     }
 
     initializeInventory();
