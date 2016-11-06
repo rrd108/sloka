@@ -172,15 +172,13 @@
 
     function getBookFromInventory(selectedBookId) {
         var bookIndexInInventory, childrenAlreadyInInventory;
-        //check if the selected book / part is already in inventory and if its children is also there
-        $.each(inventory.children, function (index, book) {
-            if (book.id == selectedBookId) {
-                bookIndexInInventory = index;
-                if (book.children) {
-                    childrenAlreadyInInventory = true;
-                }
+        //check if the selected book / part and its children are also in inventory
+        if (inventory['id' + selectedBookId]) {
+            bookIndexInInventory = 'id' + selectedBookId;
+            if(inventory['id' + selectedBookId]['children']) {
+                childrenAlreadyInInventory = true;
             }
-        });
+        }
         return {
             bookIndexInInventory: bookIndexInInventory,
             childrenAlreadyInInventory: childrenAlreadyInInventory
