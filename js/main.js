@@ -174,19 +174,15 @@
         };
     }
 
-    function getBookFromInventory(selectedBookId) {
-        var bookIndexInInventory, childrenAlreadyInInventory;
+    function isChildrenInInventory(selectedBookId) {
+        var childrenAlreadyInInventory = false;
         //check if the selected book / part and its children are also in inventory
         if (inventory['id' + selectedBookId]) {
-            bookIndexInInventory = 'id' + selectedBookId;
             if(inventory['id' + selectedBookId]['children']) {
                 childrenAlreadyInInventory = true;
             }
         }
-        return {
-            bookIndexInInventory: bookIndexInInventory,
-            childrenAlreadyInInventory: childrenAlreadyInInventory
-        };
+        return childrenAlreadyInInventory;
     }
 
     function removeSelect(select) {
@@ -327,11 +323,7 @@
             removeSelect($('#sel3'));
             removeSelect($('#sel4'));
             var selectedBookId = $(this).find('option:selected').val();
-            var __ret = getBookFromInventory(selectedBookId);
-            var bookIndexInInventory = __ret.bookIndexInInventory;
-            var childrenAlreadyInInventory = __ret.childrenAlreadyInInventory;
-
-            if (!childrenAlreadyInInventory) {
+            if (!isChildrenInInventory(selectedBookId)) {
                 $.ajax(
                     buildObjForTocGet(selectedBookId)
                 );
