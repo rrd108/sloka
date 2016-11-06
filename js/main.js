@@ -34,11 +34,16 @@
             || value.search(/mantra/i) != -1;
     }
 
-    function appendOptions(select, value) {
-        var d = value.partial ? ('data-partial="' + value.partial + '"') : '';
+    function appendOptions(select, value, selected) {
+        var d = value.partial ? (' data-partial="' + value.partial + '"') : '';
+        selected = (selected == value.id) ? 'selected ' : '';
         select.append(
-            '<option value="' + value.id + '" ' + d + '>'
-            + value.title +
+            '<option '
+                + 'value="' + value.id + '"'
+                + selected
+                + d
+                + '>'
+                + value.title +
             '</option>'
         );
     }
@@ -198,26 +203,22 @@
             removeSelect($('#sel' + i));
         }
         if ($(this).find(':selected').data('partial') == true) {
-            //go deeper
+            //go deeper in toc-get
             if (!inventory['id' + selectedId]) {
                 $.ajax(
                     buildObjForTocGet(selectedId)
                 );
             }
-            $.each(inventory['id' + selectedId]['children'], function (index, value) {
-                if (isAcceptableTitle(value.title)) {
-                    appendOptions($('#sel' + nextSelectId), value);
-                }
-            });
-            $('#sel' + nextSelectId).show();
+            updateSelect(nextSelectId, selectedId);
         } else {
-            //get the sloka
+            //get the sloka from inventory
             if (inventory['id' + selectedId]) {
                 text = inventory['id' + selectedId]['text'];
+                inventory.lastVerse = 'id' + selectedId;
                 loadText();
                 $('#shortref').text(inventory['id' + selectedId]['shortRef']);
             } else {
-                //get it from the server
+                //get it from the server by section-go
                 $.ajax({
                     url: url.sectionGo + selectedId,
                     success: function (response) {
@@ -306,13 +307,16 @@
         });
     }
 
-    function updateSel2(selectedBookId) {
-        $('#sel2').show();
-        $.each(inventory['id' + selectedBookId]['children'], function (index, value) {
+    function updateSelect(selNum, selectedBookId, selectedId) {
+        if (selectedBookId.search('id') !== 0) {
+            selectedBookId = 'id' + selectedBookId;
+        }
+        $.each(inventory[selectedBookId]['children'], function (index, value) {
             if (isAcceptableTitle(value.title)) {
-                appendOptions($('#sel2'), value);
+                appendOptions($('#sel' + selNum), value, selectedId);
             }
         });
+        $('#sel' + selNum).show();
     }
 
     function buildBookSelect(bookId) {
@@ -340,7 +344,7 @@
                     buildObjForTocGet(selectedBookId)
                 );
             }
-            updateSel2(selectedBookId);
+            updateSelect(2, selectedBookId);
         });
 
     }
@@ -364,6 +368,20 @@
         addNavHandlers();
         addSpanHandlers();
         addFilledToImgSrc($('#s' + inventory.step));
+        var bookId = 'id1';         //BG
+        if (inventory.lastVerse) {
+            text = inventory[inventory.lastVerse]['text'];
+            $('#shortref').text(inventory[inventory.lastVerse]['shortRef']);
+            var path = inventory[inventory.lastVerse].path.split('/');
+            bookId = path[0];
+            var selectNum = path.length - 1;
+            for (var i = 0; i < selectNum; i++) {
+                //we start with sel2 at index = 0
+                updateSelect(i + 2, path[i], path[i + 1].replace('id',''));
+            }
+        } else {
+            updateSelect(2, bookId);
+        }
         loadText();
         buildBookSelect(bookId);
     }
