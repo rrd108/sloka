@@ -225,13 +225,11 @@
                     url: url.sectionGo + selectedBookId,
                     success: function (response) {
                         text = filterText(response.text);
-                        var sloka = {};
-                        sloka['id' + selectedBookId] = {
+                        inventory['id' + selectedBookId] = {
                             shortRef: response.shortRef,
                             text: text
                         };
-                        $.localStorage('sloka', sloka); // TODO inventory
-                        loadText($.localStorage('sloka.step'));
+                        loadText();
                         $('#shortref').text(response.shortRef);
                     },
                     error: function (response) {
