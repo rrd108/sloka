@@ -351,22 +351,15 @@
         addSelectHandlers();
         addNavHandlers();
         addSpanHandlers();
-        addFilledToImgSrc($('#s' + $.localStorage('sloka.step')));  // TODO inventory
-        loadText($.localStorage('sloka.step')); // TODO inventory
+        addFilledToImgSrc($('#s' + inventory.step));
+        loadText();
         buildBookSelect();
     }
-
-    // TODO inventory = localStorage - be careful about how to detect login session
-
-    $.localStorage(
-        'sloka',
-        ($.localStorage('sloka') ? $.localStorage('sloka') : {step : 1})
-    );
 
     initializeInventory();
 
     $(function() {      //onready
-        if (inventory.id >= 0) {     //we are logged in to pandit
+        if (inventory.logedin === true) {     //we are logged in to pandit
             initializeApp();
         } else {
             $('#login').show();
@@ -398,6 +391,10 @@
                 });
             });
         }
+    });
+
+    $(window).on('unload', function () {
+        //$.localStorage('sloka', inventory);
     });
 
 })(jQuery);
