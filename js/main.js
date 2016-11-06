@@ -215,10 +215,10 @@
             $('#sel' + nextSelectId).show();
         } else {
             //get the sloka
-            if ($.localStorage('sloka.id' + selectedBookId)) {  // TODO inventory
-                text = $.localStorage('sloka.id' + selectedBookId + '.text');
-                loadText($.localStorage('sloka.step'));
-                $('#shortref').text($.localStorage('sloka.id' + selectedBookId + '.shortRef'));
+            if (inventory['id' + selectedBookId]) {
+                text = inventory['id' + selectedBookId]['text'];
+                loadText();
+                $('#shortref').text(inventory['id' + selectedBookId]['shortRef']);
             } else {
                 //get it from the server
                 $.ajax({
