@@ -207,7 +207,7 @@
                     buildObjForTocGet(selectedBookId, __ret.bookIndexInInventory)
                 );
             }
-            $.each(inventory.children[__ret.bookIndexInInventory].children, function (index, value) {
+            $.each(inventory['id' + selectedBookId]['children'], function (index, value) {
                 if (isAcceptableTitle(value.title)) {
                     appendOptions($('#sel' + nextSelectId), value);
                 }
@@ -254,11 +254,9 @@
                 success : function (response) {
                     if (response.id == 0) {
                         //the user is logged in to pandit
-                        inventory = response;
-                        var sloka = {};
-                        sloka['id0'] = response;
-                        $.localStorage('sloka', sloka); // TODO inventory
+                        inventory.id0 = response;
                         generateSel2(response);
+                        inventory.logedin = true;
                     }
                     // if we are not logged in we will not have anything in inventory - handled in onready
                 },
@@ -299,7 +297,7 @@
     function buildBookSelect() {
         var options = '',
             disabled = '';
-        $.each(inventory.children, function (index, book) {
+        $.each(inventory.id0.children, function (index, book) {
             options += '<option value="' + book.id + '"';
             if (allowedBooks.indexOf(book.id) == -1) {
                 options += ' disabled';
@@ -325,7 +323,7 @@
 
             //update second select
             $('#sel2').show();
-            $.each(inventory.children[bookIndexInInventory].children, function (index, value) {
+            $.each(inventory['id' + selectedBookId]['children'], function (index, value) {
                 if (isAcceptableTitle(value.title)) {
                     appendOptions($('#sel2'), value);
                 }
