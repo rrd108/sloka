@@ -140,15 +140,6 @@
         img.attr('src', img.attr('src').replace('-filled', ''));
     }
 
-    function generateSel2(response) {
-        //put BG chapters to sel2
-        $.each(response.children[0].children, function (index, value) {
-            if (isAcceptableTitle(value.title)) {
-                appendOptions($('#sel2'), value);
-            }
-        });
-    }
-
     function buildObjForTocGet(selectedBookId) {
         return {
             async: false,
@@ -242,6 +233,7 @@
         // TODO switch this to a 30 days renewal?
         // login could be happen any time when a missing book or text is requested
         inventory = $.localStorage('sloka') ? $.localStorage('sloka') : {};
+        inventory.step = inventory.step ? inventory.step : 1;
         $.ajax(
             {
                 async : false,
