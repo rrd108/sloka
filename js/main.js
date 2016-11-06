@@ -149,7 +149,7 @@
         });
     }
 
-    function buildObjForTocGet(selectedBookId, bookIndexInInventory) {
+    function buildObjForTocGet(selectedBookId) {
         return {
             async: false,
             url: url.tocGet + selectedBookId,
@@ -161,8 +161,7 @@
                     $('#login').show();
                     $('#app').hide();
                 } else if (response.id >= 0) {
-                    //put the contents to books
-                    inventory['children'][bookIndexInInventory] = response;
+                    inventory['id' + response.id] = response;
                 }
             },
             error: function (response) {
