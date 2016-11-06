@@ -115,13 +115,12 @@
         text = v.modifiedVerse;
     }
 
-    function loadText(num) {
-        $.localStorage('sloka.step', num);  // TODO inventory
-        if (num == 1) {
+    function loadText() {
+        if (inventory.step == 1) {
             makeAllTextVisible();
-        } else if (num == 2) {
+        } else if (inventory.step == 2) {
             makeHalfTextVisible();
-        } else if (num == 3) {
+        } else if (inventory.step == 3) {
             makeFirstCharVisible();
         }
         displayText();
