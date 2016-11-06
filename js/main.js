@@ -216,7 +216,7 @@
                 text = inventory['id' + selectedId]['text'];
                 inventory.lastVerse = 'id' + selectedId;
                 loadText();
-                $('#shortref').text(inventory['id' + selectedId]['shortRef']);
+                setShortref(inventory.lastVerse);
             } else {
                 //get it from the server by section-go
                 $.ajax({
@@ -230,7 +230,7 @@
                         };
                         inventory.lastVerse = 'id' + selectedId;
                         loadText();
-                        $('#shortref').text(response.shortRef);
+                        setShortref(inventory.lastVerse);
                     },
                     error: function (response) {
                         alert('Valami gáz van típusú hibába botlottam! (selectChangeHandler)');    // TODO display some error message
@@ -363,6 +363,10 @@
         });
     }
 
+    function setShortref() {
+        $('#shortref').text(inventory[inventory.lastVerse]['shortRef']);
+    }
+
     function initializeApp() {
         addSelectHandlers();
         addNavHandlers();
@@ -371,7 +375,7 @@
         var bookId = 'id1';         //BG
         if (inventory.lastVerse) {
             text = inventory[inventory.lastVerse]['text'];
-            $('#shortref').text(inventory[inventory.lastVerse]['shortRef']);
+            setShortref(inventory.lastVerse);
             var path = inventory[inventory.lastVerse].path.split('/');
             bookId = path[0];
             var selectNum = path.length - 1;
