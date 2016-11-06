@@ -239,7 +239,8 @@
 
     function initializeInventory() {
         //we need this to do not allow users full offline usage
-        // TODO switch this to a 30 days renewal - login could be happen any time when a missing book or text is requested
+        // TODO switch this to a 30 days renewal?
+        // login could be happen any time when a missing book or text is requested
         inventory = $.localStorage('sloka') ? $.localStorage('sloka') : {};
         $.ajax(
             {
