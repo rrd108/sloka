@@ -306,7 +306,15 @@
         });
     }
 
-    function buildBookSelect() {
+    function updateSel2(selectedBookId) {
+        $('#sel2').show();
+        $.each(inventory['id' + selectedBookId]['children'], function (index, value) {
+            if (isAcceptableTitle(value.title)) {
+                appendOptions($('#sel2'), value);
+            }
+        });
+    }
+
     function buildBookSelect(bookId) {
         var options = '',
             disabled = '';
@@ -332,15 +340,9 @@
                     buildObjForTocGet(selectedBookId)
                 );
             }
-
-            //update second select
-            $('#sel2').show();
-            $.each(inventory['id' + selectedBookId]['children'], function (index, value) {
-                if (isAcceptableTitle(value.title)) {
-                    appendOptions($('#sel2'), value);
-                }
-            });
+            updateSel2(selectedBookId);
         });
+
     }
 
     function addSelectHandlers() {
