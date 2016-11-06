@@ -245,9 +245,18 @@
                     if (response.id == 0) {
                         inventory.loggedin = true;
                         //the user is logged in to pandit
-                        inventory.id0 = response;
-                        generateSel2(response);
-                        inventory.logedin = true;
+                        inventory.id0 = {
+                            id : 0,
+                            children : []
+                        };
+                        $.each(response.children, function (index, book) {
+                            inventory.id0.children[index] = {
+                                id : book.id,
+                                title : book.title,
+                                partial : book.partial ? book.partial : true
+                            };
+                        });
+                        inventory.id1 = response.children[0];
                     }
                     // if we are not logged in we will not have anything in inventory - handled in onready
                 },
