@@ -199,9 +199,7 @@
         }
         if ($(this).find(':selected').data('partial') == true) {
             //go deeper
-            if ($.localStorage('sloka.id' + selectedBookId)) {  // TODO inventory
-                console.log('get from localStorage')
-            } else {
+            if (!inventory['id' + selectedBookId]) {
                 $.ajax(
                     buildObjForTocGet(selectedBookId)
                 );
