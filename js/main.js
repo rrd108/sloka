@@ -272,7 +272,7 @@
         $('nav img').click(function (event) {
             $('nav img').each(function () {
                 if (event.target == this) {
-                    var num = $(this).attr('src').replace('.png', '')
+                    inventory.step = $(this).attr('src').replace('.png', '')
                         .replace('img/', '')
                         .replace('-filled', '');
                     addFilledToImgSrc($(this));
@@ -280,6 +280,7 @@
                     removeFilledFromImgSrc($(this));
                 }
             });
+            loadText();
         });
     }
 
