@@ -104,6 +104,7 @@ header, footer {
 footer {
     bottom: 0;
     position: fixed;
+    font-size: 75%;
 }
 
 nav, #login > p {
@@ -116,6 +117,16 @@ nav img {
 
 span.unseen {
     color: #fff;
+}
+
+footer span {
+    margin: .5em;
+    padding: .5em;
+    float: left;
+    background-color: #fff;
+    font-weight: bold;
+    color: #0a0;
+    border-radius: .5em;
 }
 
 #shortref {

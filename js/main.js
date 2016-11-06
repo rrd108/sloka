@@ -6,7 +6,7 @@
     //['BG', 'SB', 'CC', 'NOI', 'ISO']
     var text = '';
 
-    var test = false;
+    var test = true;
 
     if (test) {
         url = {
@@ -244,8 +244,7 @@
         //we need this to do not allow users full offline usage
         // TODO switch this to a 30 days renewal?
         // login could be happen any time when a missing book or text is requested
-        inventory = $.localStorage('sloka') ? $.localStorage('sloka') : {};
-        inventory.step = inventory.step ? inventory.step : 1;
+        inventory = $.localStorage('sloka') ? $.localStorage('sloka') : {step : 1, learnt : []};
         $.ajax(
             {
                 async : false,
@@ -282,8 +281,8 @@
 
     function addNavHandlers() {
         //attach event handlers for nav images
-        $('nav img').click(function (event) {
-            $('nav img').each(function () {
+        $('nav img.steps').click(function (event) {
+            $('nav img.steps').each(function () {
                 if (event.target == this) {
                     inventory.step = $(this).attr('src').replace('.png', '')
                         .replace('img/', '')
@@ -294,6 +293,13 @@
                 }
             });
             loadText();
+        });
+
+        $('#learnt').click(function () {
+            if (inventory.learnt.indexOf(inventory.lastVerse) == -1) {
+                inventory.learnt.push(inventory.lastVerse);
+                buildLearnt();
+            }
         });
     }
 
@@ -367,6 +373,17 @@
         $('#shortref').text(inventory[inventory.lastVerse]['shortRef']);
     }
 
+    function buildLearnt() {
+        $('footer').empty();
+        $.each(inventory.learnt, function (index, value) {
+            $('footer').append(
+                '<span>'
+                    + inventory[value].shortRef
+                + '</span>'
+            );
+        });
+    }
+
     function initializeApp() {
         addSelectHandlers();
         addNavHandlers();
@@ -388,6 +405,7 @@
         }
         loadText();
         buildBookSelect(bookId);
+        buildLearnt();
     }
 
     initializeInventory();
