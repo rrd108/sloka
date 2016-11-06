@@ -140,6 +140,18 @@
         img.attr('src', img.attr('src').replace('-filled', ''));
     }
 
+    function getPath() {
+        var p;
+        var path = 'id' + $('#books').val();
+        for (var i = 2; i < 5; i++) {
+            p = parseInt($('#sel' + i).val());  //NaN is falsy
+            if (p) {
+                path += '/id' + p;
+            }
+        }
+        return path;
+    }
+
     function buildObjForTocGet(selectedBookId) {
         return {
             async: false,
@@ -153,6 +165,7 @@
                     $('#app').hide();
                 } else if (response.id >= 0) {
                     inventory['id' + response.id] = response;
+                    inventory['id' + response.id]['path'] = getPath();
                 }
             },
             error: function (response) {
@@ -183,19 +196,19 @@
     }
 
     function selectChangeHandler() {
-        var selectedBookId = $(this).val();
+        var selectedId = $(this).val();
         var nextSelectId = parseInt($(this).attr('id').replace('sel', '')) + 1;
         for (var i = nextSelectId; i < 4; i++) {   //we have maximum 4 selects
             removeSelect($('#sel' + i));
         }
         if ($(this).find(':selected').data('partial') == true) {
             //go deeper
-            if (!inventory['id' + selectedBookId]) {
+            if (!inventory['id' + selectedId]) {
                 $.ajax(
-                    buildObjForTocGet(selectedBookId)
+                    buildObjForTocGet(selectedId)
                 );
             }
-            $.each(inventory['id' + selectedBookId]['children'], function (index, value) {
+            $.each(inventory['id' + selectedId]['children'], function (index, value) {
                 if (isAcceptableTitle(value.title)) {
                     appendOptions($('#sel' + nextSelectId), value);
                 }
@@ -203,20 +216,22 @@
             $('#sel' + nextSelectId).show();
         } else {
             //get the sloka
-            if (inventory['id' + selectedBookId]) {
-                text = inventory['id' + selectedBookId]['text'];
+            if (inventory['id' + selectedId]) {
+                text = inventory['id' + selectedId]['text'];
                 loadText();
-                $('#shortref').text(inventory['id' + selectedBookId]['shortRef']);
+                $('#shortref').text(inventory['id' + selectedId]['shortRef']);
             } else {
                 //get it from the server
                 $.ajax({
-                    url: url.sectionGo + selectedBookId,
+                    url: url.sectionGo + selectedId,
                     success: function (response) {
                         text = filterText(response.text);
-                        inventory['id' + selectedBookId] = {
-                            shortRef: response.shortRef,
-                            text: text
+                        inventory['id' + selectedId] = {
+                            shortRef : response.shortRef,
+                            text : text,
+                            path : getPath()
                         };
+                        inventory.lastVerse = 'id' + selectedId;
                         loadText();
                         $('#shortref').text(response.shortRef);
                     },
