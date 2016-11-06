@@ -202,9 +202,8 @@
             if ($.localStorage('sloka.id' + selectedBookId)) {  // TODO inventory
                 console.log('get from localStorage')
             } else {
-                var __ret = getBookFromInventory(selectedBookId);
                 $.ajax(
-                    buildObjForTocGet(selectedBookId, __ret.bookIndexInInventory)
+                    buildObjForTocGet(selectedBookId)
                 );
             }
             $.each(inventory['id' + selectedBookId]['children'], function (index, value) {
@@ -317,7 +316,7 @@
 
             if (!childrenAlreadyInInventory) {
                 $.ajax(
-                    buildObjForTocGet(selectedBookId, bookIndexInInventory)
+                    buildObjForTocGet(selectedBookId)
                 );
             }
 
