@@ -1,0 +1,38 @@
+{
+  "id":6,
+  "title":"BG - 1",
+  "children":[
+    {
+      "id":7,
+      "title":"Előszó"
+    },
+    {
+      "id":8,
+      "title":"Első vers"
+    },
+    {
+      "id":9,
+      "title":"Második vers"
+    },
+    {
+      "id":10,
+      "title":"Harmadik vers"
+    },
+    {
+      "id":11,
+      "title":"Negyedik vers"
+    },
+    {
+      "id":12,
+      "title":"5. vers"
+    },
+    {
+      "id":13,
+      "title":"6. vers"
+    },
+    {
+      "id":14,
+      "title":"7. vers"
+    }
+  ]
+}
