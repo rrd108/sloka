@@ -303,7 +303,7 @@
         });
     }
 
-    function addSpanHandlers() {
+    function addWordSpanHandlers() {
         //we use .on() as it will work with later dynamically created spans
         $('p').on('click', 'span', function () {
             $(this).removeClass('unseen');
@@ -387,7 +387,7 @@
     function initializeApp() {
         addSelectHandlers();
         addNavHandlers();
-        addSpanHandlers();
+        addWordSpanHandlers();
         addFilledToImgSrc($('#s' + inventory.step));
         var bookId = 'id1';         //BG
         if (inventory.lastVerse) {
