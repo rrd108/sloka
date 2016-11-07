@@ -5,6 +5,7 @@
     var allowedBooks = [1, 729, 11365, 22894, 22996];    //books with slokas
     //['BG', 'SB', 'CC', 'NOI', 'ISO']
     var text = '';
+    var verseSelectsNum = 4;
 
     var test = true;
 
@@ -190,18 +191,26 @@
         return childrenAlreadyInInventory;
     }
 
-    function removeSelect(select) {
-        select.empty();
-        select.append('<option>--- válassz ---</option>');
-        select.hide();
+    function removeSelect(selectIds) {
+        if($.isNumeric(selectIds)) {
+            selectIds = [selectIds];
+        }
+        $.each(selectIds, function (index, selectId) {
+            select = $('#sel' + selectId);
+            select.empty();
+            select.append('<option>--- válassz ---</option>');
+            select.hide();
+        });
     }
 
     function selectChangeHandler() {
         var selectedId = $(this).val();
         var nextSelectId = parseInt($(this).attr('id').replace('sel', '')) + 1;
-        for (var i = nextSelectId; i < 4; i++) {   //we have maximum 4 selects
-            removeSelect($('#sel' + i));
+        var selects = [];
+        for (var i = nextSelectId; i < verseSelectsNum; i++) {
+            selects.push(i);
         }
+        removeSelect(selects);
         if ($(this).find(':selected').data('partial') == true) {
             //go deeper in toc-get
             if (!inventory['id' + selectedId]) {
@@ -323,9 +332,13 @@
             }
         });
         $('#sel' + selNum).show();
+        for (var i = ++selNum; i < verseSelectsNum; i++) {
+            removeSelect(i);
+        }
     }
 
     function buildBookSelect(bookId) {
+        $('#books').empty();
         var options = '',
             disabled = '';
         $.each(inventory.id0.children, function (index, book) {
@@ -339,25 +352,10 @@
             options += '>' + book.title + '</option>';
         });
         $('#books').append(options);
-
-        $('#books').change(function () {
-            removeSelect($('#sel2'));
-            removeSelect($('#sel3'));
-            removeSelect($('#sel4'));
-            var selectedBookId = $(this).find('option:selected').val();
-            if (!isChildrenInInventory(selectedBookId)) {
-                $.ajax(
-                    buildObjForTocGet(selectedBookId)
-                );
-            }
-            updateSelect(2, selectedBookId);
-        });
-
     }
 
     function addSelectHandlers() {
-        removeSelect($('#sel3'));
-        removeSelect($('#sel4'));
+        removeSelect([3, 4]);
         $('#sel2').change(function () {
             selectChangeHandler.call(this);
         });
@@ -369,18 +367,76 @@
         });
     }
 
-    function setShortref() {
-        $('#shortref').text(inventory[inventory.lastVerse]['shortRef']);
+    function setShortref(id) {
+        $('#shortref').text(inventory[id]['shortRef']);
     }
 
     function buildLearnt() {
+        var removelearnt = $('#removelearnt').hide().detach();
         $('footer').empty();
         $.each(inventory.learnt, function (index, value) {
             $('footer').append(
-                '<span>'
+                '<span data-inventoryid="' + value + '">'
                     + inventory[value].shortRef
-                + '</span>'
+                + '</a>'
             );
+        });
+        $('footer').append(removelearnt);
+    }
+
+    function addLearntHandlers() {
+        //we use .on() as it will work with later dynamically created anchors
+        $('footer').on('mouseover', 'span', function () {
+            $(this).append($('#removelearnt').show());
+        });
+        $('footer').on('mouseout', 'span', function () {
+            $('#removelearnt').hide();
+        });
+
+        $('footer').click(function (event) {
+            var verseId;
+            if ($(event.target).prop('tagName') == 'IMG') {
+                verseId = $(event.target).parent().data('inventoryid');
+                var removeLearnt = $(event.target);
+                $(event.target).parent().remove();
+                $('footer').append(removeLearnt);
+                inventory.learnt = $.grep(inventory.learnt, function (value) {
+                    return value != verseId;
+                });
+            } else if ($(event.target).prop('tagName') == 'SPAN') {
+                verseId = $(event.target).data('inventoryid');
+                var bookId = loadVerse(verseId);
+                loadText();
+                buildBookSelect(bookId);
+            }
+        });
+    }
+
+    function loadVerse(verseId) {
+        inventory.lastVerse = verseId;
+        text = inventory[verseId]['text'];
+        setShortref(verseId);
+        var path = inventory[verseId].path.split('/');
+        var bookId = path[0];
+        var selectNum = path.length - 1;
+        for (var i = 0; i < selectNum; i++) {
+            //we start with sel2 at index = 0
+            removeSelect(i + 2);
+            updateSelect(i + 2, path[i], path[i + 1].replace('id', ''));
+        }
+        return bookId;
+    }
+
+    function addBookChangeHandler() {
+        $('#books').change(function () {
+            removeSelect([2, 3, 4]);
+            var selectedBookId = $(this).find('option:selected').val();
+            if (!isChildrenInInventory(selectedBookId)) {
+                $.ajax(
+                    buildObjForTocGet(selectedBookId)
+                );
+            }
+            updateSelect(2, selectedBookId);
         });
     }
 
@@ -391,21 +447,15 @@
         addFilledToImgSrc($('#s' + inventory.step));
         var bookId = 'id1';         //BG
         if (inventory.lastVerse) {
-            text = inventory[inventory.lastVerse]['text'];
-            setShortref(inventory.lastVerse);
-            var path = inventory[inventory.lastVerse].path.split('/');
-            bookId = path[0];
-            var selectNum = path.length - 1;
-            for (var i = 0; i < selectNum; i++) {
-                //we start with sel2 at index = 0
-                updateSelect(i + 2, path[i], path[i + 1].replace('id',''));
-            }
+            bookId = loadVerse(inventory.lastVerse);
         } else {
             updateSelect(2, bookId);
         }
         loadText();
         buildBookSelect(bookId);
+        addBookChangeHandler();
         buildLearnt();
+        addLearntHandlers();
     }
 
     initializeInventory();
