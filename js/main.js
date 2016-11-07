@@ -253,6 +253,12 @@
         //we need this to do not allow users full offline usage
         // TODO switch this to a 30 days renewal?
         // login could be happen any time when a missing book or text is requested
+        if ($.localStorage('sloka.learnt') === undefined) {
+            //delete old sloka from localstorage
+            //https://github.com/rrd108/sloka/issues/10
+            localStorage.removeItem('sloka');
+            $.localStorage.remove('sloka');
+        }
         inventory = $.localStorage('sloka') ? $.localStorage('sloka') : {step : 1, learnt : []};
         $.ajax(
             {
