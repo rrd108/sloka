@@ -91,9 +91,9 @@ body {
     font-size: 1.35rem;
 }
 
-p {
+#main {
     padding: 0 .7em;
-    margin: 0;
+    margin: 0 0 13px 0;
 }
 
 header, footer {
@@ -105,7 +105,7 @@ footer {
     bottom: 0;
     position: fixed;
     font-size: 75%;
-    min-height: 1em;
+    height: 13px;
 }
 
 nav, #login > p {
@@ -130,6 +130,12 @@ footer span {
     border-radius: .5em;
     cursor: pointer;
     position: relative;
+}
+
+#footerhamburger {
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
 }
 
 #removelearnt {

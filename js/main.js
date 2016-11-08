@@ -379,7 +379,8 @@
 
     function buildLearnt() {
         var removelearnt = $('#removelearnt').hide().detach();
-        $('footer').empty();
+        var footerhamburger = $('#footerhamburger').hide().detach();
+        $('footer').empty().append(footerhamburger.show());
         $.each(inventory.learnt, function (index, value) {
             $('footer').append(
                 '<span data-inventoryid="' + value + '">'
@@ -401,7 +402,7 @@
 
         $('footer').click(function (event) {
             var verseId;
-            if ($(event.target).prop('tagName') == 'IMG') {
+            if ($(event.target).attr('id') == 'removelearnt') {
                 verseId = $(event.target).parent().data('inventoryid');
                 var removeLearnt = $(event.target);
                 $(event.target).parent().remove();
@@ -415,6 +416,13 @@
                 loadText();
                 buildBookSelect(bookId);
             }
+        });
+    }
+
+    function addFooterHamburgerHandler() {
+        $('#footerhamburger').click(function () {
+            var h = ($('footer').height() == '13' ? 'auto' : '13');
+            $('footer').height(h);
         });
     }
 
@@ -462,6 +470,7 @@
         addBookChangeHandler();
         buildLearnt();
         addLearntHandlers();
+        addFooterHamburgerHandler();
     }
 
     initializeInventory();
