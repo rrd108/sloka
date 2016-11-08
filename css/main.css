@@ -116,6 +116,10 @@ nav img {
     cursor: pointer;
 }
 
+#help {
+    float: right;
+}
+
 span.unseen {
     color: #fff;
 }
