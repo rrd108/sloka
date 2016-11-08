@@ -516,6 +516,7 @@
     });
 
     $(window).on('unload', function () {
+        inventory.loggedin = false;
         $.localStorage('sloka', inventory);
     });
 
