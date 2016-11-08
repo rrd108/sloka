@@ -454,6 +454,33 @@
         });
     }
 
+    function loginToPandit() {
+        $.ajax({
+            url: url.auth,
+            method: "POST",
+            dataType: "json",
+            data: {
+                email: $('#email').val(),
+                password: window.md5($('#password').val())
+            },
+            success: function (response) {
+                if (response.ok) {
+                    //we are logged in
+                    $('#login').hide();
+                    initializeInventory();
+                    initializeApp();
+                    $('#app').show();
+                } else if (response.fail) {
+                    alert('Hibás bejelentkezési név vagy jelszó!'); // TODO
+                }
+                // TODO response.message.search('csak 1 eszközön') != -1
+            },
+            error: function (response) {
+                alert('Valami gáz van típusú hibába botlottam! (onReady)');    // TODO display some error message
+            }
+        });
+    }
+
     function initializeApp() {
         addSelectHandlers();
         addNavHandlers();
@@ -481,32 +508,10 @@
         } else {
             $('#login').show();
             $('#app').hide();
-            $('#loginBtn').click(function(){
-                $.ajax({
-                    url: url.auth,
-                    method: "POST",
-                    dataType: "json",
-                    data: {
-                        email: $('#email').val(),
-                        password: window.md5($('#password').val())
-                    },
-                    success: function (response) {
-                        if (response.ok) {
-                            //we are logged in
-                            $('#login').hide();
-                            initializeInventory();
-                            initializeApp();
-                            $('#app').show();
-                        } else if (response.fail) {
-                            alert('Hibás bejelentkezési név vagy jelszó!'); // TODO
-                        }
-                        // TODO response.message.search('csak 1 eszközön') != -1
-                    },
-                    error: function (response) {
-                        alert('Valami gáz van típusú hibába botlottam! (onReady)');    // TODO display some error message
-                    }
-                });
-            });
+            $('#loginBtn').click(loginToPandit);
+            /*$('#password').keypress(function (event) {
+
+            });*/
         }
     });
 
