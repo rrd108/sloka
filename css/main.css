@@ -112,7 +112,7 @@ nav, #login > p {
     padding: 1em;
 }
 
-#login > input, #login > button {
+#login > form {
     margin-left: 1em;
 }
 
