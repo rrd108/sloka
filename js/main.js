@@ -500,8 +500,11 @@
                             $('#app').show();
                         } else if (response.fail) {
                             alert('Hibás bejelentkezési név vagy jelszó!'); // TODO
+                        } else if (response.message) {
+                            alert(response.message);
+                        } else {
+                            alert('A bejelentkezés során valamilyen mittudomén típusú hibára futottam!'); // TODO
                         }
-                        // TODO response.message.search('csak 1 eszközön') != -1
                     },
                     error: function (response) {
                         alert('Valami gáz van típusú hibába botlottam! (onReady)');    // TODO display some error message
