@@ -106,7 +106,7 @@ footer {
     bottom: 0;
     position: fixed;
     font-size: 75%;
-    height: 13px;
+    height: 21px;/*21px img + 4px+4px padding of footerhamburger*/
 }
 
 nav, #login > p {
@@ -152,6 +152,7 @@ footer span {
     display: block;
     margin: 0 auto;
     cursor: pointer;
+    padding: 4px 10px 4px 10px;
 }
 
 #removelearnt {

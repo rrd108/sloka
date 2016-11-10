@@ -16,7 +16,8 @@
             tocGet : 'pandit-toc-get-response.json-',
             sectionGo : 'pandit-section-go-response.json?',
             auth : 'pandit-authenticate.json',
-            expired : 'pandit-expired.json'
+            expired : 'pandit-expired.json',
+            help : 'help.html'
         };
     } else {
         url.base = 'http://pandit.hu/app/';
@@ -391,17 +392,22 @@
     }
 
     function buildLearnt() {
-        var removelearnt = $('#removelearnt').hide().detach();
-        var footerhamburger = $('#footerhamburger').hide().detach();
-        $('footer').empty().append(footerhamburger.show());
-        $.each(inventory.learnt, function (index, value) {
-            $('footer').append(
-                '<span data-inventoryid="' + value + '">'
+        if (inventory.learnt.length) {
+            var removelearnt = $('#removelearnt').hide().detach();
+            var footerhamburger = $('#footerhamburger').hide().detach();
+            $('footer').empty().append(footerhamburger.show());
+            $.each(inventory.learnt, function (index, value) {
+                $('footer').append(
+                    '<span data-inventoryid="' + value + '">'
                     + inventory[value].shortRef
-                + '</a>'
-            );
-        });
-        $('footer').append(removelearnt);
+                    + '</a>'
+                );
+            });
+            $('footer').append(removelearnt);
+        } else {
+            //nothing in footer lets add some info text
+            $('footer').append('<span>Még nincs elmentett versed</span>');
+        }
     }
 
     function addFooterHandlers() {
@@ -429,7 +435,7 @@
                 loadText();
                 buildBookSelect(bookId);
             } else if ($(event.target).attr('id') == 'footerhamburger') {
-                var h = ($('footer').height() == '13' ? 'auto' : '13');
+                var h = ($('footer').height() == '21' ? 'auto' : '21');
                 $('footer').height(h);
             }
         });
