@@ -472,10 +472,10 @@
 
     $(function() {      //onready
         if (inventory.loggedin === true) {     //we are logged in to pandit
+            $('#app').show();
             initializeApp();
         } else {
             $('#login').show();
-            $('#app').hide();
             $('#login > form').submit(function (event) {
                 event.preventDefault();
                 $.ajax({
