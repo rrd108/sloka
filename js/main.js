@@ -391,7 +391,7 @@
         $('footer').append(removelearnt);
     }
 
-    function addLearntHandlers() {
+    function addFooterHandlers() {
         //we use .on() as it will work with later dynamically created anchors
         $('footer').on('mouseover', 'span', function () {
             $(this).append($('#removelearnt').show());
@@ -415,14 +415,10 @@
                 var bookId = loadVerse(verseId);
                 loadText();
                 buildBookSelect(bookId);
+            } else if ($(event.target).attr('id') == 'footerhamburger') {
+                var h = ($('footer').height() == '13' ? 'auto' : '13');
+                $('footer').height(h);
             }
-        });
-    }
-
-    function addFooterHamburgerHandler() {
-        $('#footerhamburger').click(function () {
-            var h = ($('footer').height() == '13' ? 'auto' : '13');
-            $('footer').height(h);
         });
     }
 
@@ -469,8 +465,7 @@
         buildBookSelect(bookId);
         addBookChangeHandler();
         buildLearnt();
-        addLearntHandlers();
-        addFooterHamburgerHandler();
+        addFooterHandlers();
     }
 
     initializeInventory();
