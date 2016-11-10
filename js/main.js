@@ -311,7 +311,7 @@
             loadText();
         });
 
-        $('#learnt').click(function () {
+        $('#save').click(function () {
             if (inventory.learnt.indexOf(inventory.lastVerse) == -1) {
                 inventory.learnt.push(inventory.lastVerse);
                 buildLearnt();
