@@ -24,6 +24,7 @@
         url.tocGet = url.base + 'toc/get/';
         url.sectionGo = url.base + 'txt/section/go/';
         url.auth = url.base + 'auth/authenticate';
+        url.help = 'help.html';
     }
 
     function isAcceptableTitle(value) {
@@ -315,6 +316,18 @@
                 inventory.learnt.push(inventory.lastVerse);
                 buildLearnt();
             }
+        });
+
+        $('#help').click(function () {
+            $.ajax(
+                {
+                    async : false,
+                    url : url.help,
+                    success : function (response) {
+                        $('#main').empty().append(response);
+                    }
+                }
+            );
         });
     }
 
