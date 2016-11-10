@@ -11,21 +11,25 @@
 
     if (test) {
         url = {
-            base : '',
+            sloka : '',
+            pandit : '',
             root : 'pandit-toc-root.json',
             tocGet : 'pandit-toc-get-response.json-',
             sectionGo : 'pandit-section-go-response.json?',
             auth : 'pandit-authenticate.json',
             expired : 'pandit-expired.json',
-            help : 'help.html'
+            help : 'help.html',
+            logout : 'pandit-auth-logout.json'
         };
     } else {
-        url.base = 'http://pandit.hu/app/';
-        url.root = url.base + 'toc/root';
-        url.tocGet = url.base + 'toc/get/';
-        url.sectionGo = url.base + 'txt/section/go/';
-        url.auth = url.base + 'auth/authenticate';
+        url.sloka = 'http://pandit.hu/sloka/';
+        url.pandit = 'http://pandit.hu/app/';
+        url.root = url.pandit + 'toc/root';
+        url.tocGet = url.pandit + 'toc/get/';
+        url.sectionGo = url.pandit + 'txt/section/go/';
+        url.auth = url.pandit + 'auth/authenticate';
         url.help = 'help.html';
+        url.logout = url.pandit + 'auth/logout';
     }
 
     function isAcceptableTitle(value) {
@@ -322,10 +326,20 @@
         $('#help').click(function () {
             $.ajax(
                 {
-                    async : false,
                     url : url.help,
                     success : function (response) {
                         $('#main').empty().append(response);
+                    }
+                }
+            );
+        });
+
+        $('#logout').click(function () {
+            $.ajax(
+                {
+                    url : url.logout,
+                    success : function () {
+                        window.location.href = url.sloka;
                     }
                 }
             );

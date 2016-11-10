@@ -128,8 +128,9 @@ nav img {
     color: #fff;
 }
 
-#help {
+.fr {
     float: right;
+    margin-left: 10px;
 }
 
 span.unseen {
