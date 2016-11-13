@@ -1,5 +1,0 @@
-<IfModule mod_rewrite.c>
-    RewriteEngine on
-    RewriteBase /~rrd/sloka/
-    RewriteRule    (pandit-toc-get-response).json-(.*)    $1-$2.json    [NC,L]
-</IfModule>
