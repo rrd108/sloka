@@ -1,0 +1,12 @@
+{
+    "name": "rrd108/sloka",
+    "require": {
+        "cron/cron": "^1.0"
+    },
+    "authors": [
+        {
+            "name": "rrd",
+            "email": "rrd@webmania.cc"
+        }
+    ]
+}
