@@ -30,7 +30,16 @@
         url.auth = url.pandit + 'auth/authenticate';
         url.help = 'help.html';
         url.logout = url.pandit + 'auth/logout';
-    }
+    }  /*else {
+        url.sloka = 'http://pandit.hu/sloka/';
+        url.pandit = './gateway.php';
+        url.root = url.pandit + '?url=toc/root';
+        url.tocGet = url.pandit + '?url=toc/get/';
+        url.sectionGo = url.pandit + '?url=txt/section/go/';
+        url.auth = url.pandit + '?url=auth/authenticate';
+        url.help = 'help.html';
+        url.logout = url.pandit + '?url=auth/logout';
+    }*/
 
     function isAcceptableTitle(value) {
         return value.search(/ének/i) != -1
