@@ -1,7 +1,7 @@
 {
     "name": "rrd108/sloka",
     "require": {
-        "cron/cron": "^1.0"
+        "curl/curl": "^1.5"
     },
     "authors": [
         {
