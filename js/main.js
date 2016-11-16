@@ -4,10 +4,11 @@
     var url = {};
     var allowedBooks = [1, 729, 11365, 22894, 22996];    //books with slokas
     //['BG', 'SB', 'CC', 'NOI', 'ISO']
+    //TODO check on reindexing
     var text = '';
     var verseSelectsNum = 4;
 
-    var test = false;
+    var test = true;
 
     if (test) {
         url = {
