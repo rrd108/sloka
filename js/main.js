@@ -8,7 +8,7 @@
     var text = '';
     var verseSelectsNum = 4;
 
-    var test = true;
+    var test = false;
 
     if (test) {
         url = {
