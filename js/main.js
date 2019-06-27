@@ -333,6 +333,20 @@
             }
         });
 
+        $('#switch').click(function () {
+            var parts = $('main').html()
+                .replace('<br><br>', '|')
+                .replace(/<br>/g, ' ')
+                .split('|');
+            var verse = [];
+            $.each(parts[0].split(' '), function (index, value) {
+                verse.push(value.trim());
+            });
+            shuffledVerse = verse.sort(function () { return 0.5 - Math.random() });
+
+            $('main').append('<div id="shuffledVerse">' + shuffledVerse.join(' ') + '</div>');
+        });
+
         $('#help').click(function () {
             $.ajax(
                 {

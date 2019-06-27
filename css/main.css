@@ -173,6 +173,14 @@ footer span {
     border-radius: .5em;
 }
 
+#shuffledVerse {
+    background: pink;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 1rem;
+}
+
 dt {
     font-weight: bold;
 }
