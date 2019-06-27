@@ -8,19 +8,19 @@
     var text = '';
     var verseSelectsNum = 4;
 
-    var test = false;
+    var test = true;
 
     if (test) {
         url = {
             sloka : '',
             pandit : '',
-            root : 'pandit-toc-root.json',
-            tocGet : 'pandit-toc-get-response.json-',
-            sectionGo : 'pandit-section-go-response.json?',
-            auth : 'pandit-authenticate.json',
-            expired : 'pandit-expired.json',
+            root : 'testdata/pandit-toc-root.json',
+            tocGet: 'testdata/pandit-toc-get-response-',    //BG4.4
+            sectionGo: 'testdata/pandit-section-go-response.json?',
+            auth: 'testdata/pandit-authenticate.json',
+            expired: 'testdata/pandit-expired.json',
             help : 'help.html',
-            logout : 'pandit-auth-logout.json'
+            logout: 'testdata/pandit-auth-logout.json'
         };
     } else {
         url.sloka = 'http://pandit.hu/sloka/';
