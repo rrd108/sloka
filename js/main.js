@@ -149,7 +149,7 @@
     }
 
     function displayText() {
-        $('#main').html(text.replace(/(?:\n)/g, '<br>'));
+        $('main').html(text.replace(/(?:\n)/g, '<br>'));
     }
 
     function addFilledToImgSrc(img) {
@@ -338,7 +338,7 @@
                 {
                     url : url.help,
                     success : function (response) {
-                        $('#main').empty().append(response);
+                        $('main').empty().append(response);
                     }
                 }
             );

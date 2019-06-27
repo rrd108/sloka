@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sudo git pull origin master
+cd ..
+sudo chown -R pandit *
+sudo chgrp -R pandit *
